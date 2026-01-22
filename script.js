@@ -3,9 +3,13 @@ const chatMessages = document.getElementById("chat-messages");
 const userInput = document.getElementById("user-input");
 const sendBtn = document.getElementById("send-btn");
 
-// ===== Funktionen =====
+// ===== GPT4All Modell laden =====
+const model = new GPT4All({
+  model: "gpt4all-mini.bin", // stelle sicher, dass die Datei im Hauptverzeichnis liegt
+  verbose: true
+});
 
-// Nachricht erstellen und animiert hinzufügen
+// ===== Nachricht erstellen =====
 function addMessage(text, sender) {
   const bubble = document.createElement("div");
   bubble.classList.add("bubble", sender);
@@ -16,39 +20,41 @@ function addMessage(text, sender) {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// Simulierte KIM-Antwort
-function kimReply(userText) {
-  // Hier kannst du später echte KI einfügen
-  const replies = [
-    "Cool, erzähl mir mehr!",
-    "Interessant 😎",
-    "Das klingt spannend!",
-    "Haha, sehr witzig!",
-    "Klar, das verstehe ich!"
-  ];
+// ===== KIM antwortet individuell =====
+async function kimReply(userText) {
+  addMessage("KIM tippt…", "kim");
+  const typingBubble = chatMessages.querySelector(".kim:last-child");
 
-  // Zufällige Antwort wählen
-  const reply = replies[Math.floor(Math.random() * replies.length)];
+  try {
+    const response = await model.generate(userText, {
+      max_tokens: 150,
+      temperature: 0.8
+    });
 
-  // Animation leicht verzögern für realistisches Tippen
-  setTimeout(() => addMessage(reply, "kim"), 500);
+    // Entferne „tippt…“
+    typingBubble.remove();
+
+    addMessage(response, "kim");
+  } catch (err) {
+    typingBubble.remove();
+    addMessage("Oops, KIM kann gerade nicht antworten 😅", "kim");
+    console.error(err);
+  }
 }
 
-// Nachricht senden
+// ===== Nachricht senden =====
 function sendMessage() {
   const text = userInput.value.trim();
-  if (text === "") return;
+  if (!text) return;
 
   addMessage(text, "user");
   userInput.value = "";
 
-  // KIM antwortet
   kimReply(text);
 }
 
 // ===== Events =====
 sendBtn.addEventListener("click", sendMessage);
-userInput.addEventListener("keypress", (e) => {
+userInput.addEventListener("keypress", e => {
   if (e.key === "Enter") sendMessage();
 });
-
