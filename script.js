@@ -18,7 +18,6 @@ products.forEach(product => {
     modalTitle.textContent = product.dataset.name;
     modalDesc.textContent = product.dataset.desc;
     modalPrice.textContent = product.dataset.price + " €";
-
     modal.style.display = "block";
   });
 });
