@@ -542,17 +542,19 @@
         <!-- WIZARD TAB -->
         <div id="wizard" class="tab-content active">
             
-            <!-- STEP 1 -->
+            <!-- STEP 1: Known Values -->
             <div id="step1" class="step active">
                 <div class="card">
-                    <div class="step-indicator">Schritt 1 von 4</div>
-                    <div class="card-title">📌 Jahresleistung</div>
+                    <div class="step-indicator">Schritt 1 von 3</div>
+                    <div class="card-title">📌 Bekannte Noten eingeben</div>
                     <div class="info-box">
-                        Die Jahresleistung ist dein Durchschnitt aus dem ganzen Schuljahr. Sie zählt am meisten (Standard: 50%).
+                        Gib hier deine bereits bekannten Noten ein: Jahresleistung und die Kommunikations-/Praxisprüfung (falls vorhanden).
                     </div>
+
+                    <!-- Jahresleistung -->
                     <div class="form-group">
-                        <label>Welche Note hast du im Durchschnitt während des Jahres gehabt?</label>
-                        <span class="label-hint">Deine Klassenarbeiten, Tests, Mitarbeit, etc.</span>
+                        <label>Jahresleistung (bekannt)</label>
+                        <span class="label-hint">Dein Durchschnitt aus dem ganzen Schuljahr</span>
                         <div class="input-with-unit">
                             <input 
                                 type="number" 
@@ -566,17 +568,49 @@
                             <span class="input-unit">📝</span>
                         </div>
                     </div>
+
+                    <!-- Praktische Prüfung vorhanden? -->
+                    <div class="form-group">
+                        <label>Hat dein Fach eine Kommunikations-/praktische Prüfung?</label>
+                        <button class="option-button" onclick="selectOption('hasPractical', true, this)">
+                            <span class="option-icon">✅</span>
+                            <span>Ja, mein Fach hat eine</span>
+                        </button>
+                        <button class="option-button" onclick="selectOption('hasPractical', false, this)">
+                            <span class="option-icon">❌</span>
+                            <span>Nein, mein Fach hat keine</span>
+                        </button>
+                    </div>
+
+                    <!-- Praktische Prüfung Note (conditional) -->
+                    <div class="form-group hidden" id="praktischInputForm">
+                        <label>Kommunikations-/Praxisprüfung Note (bekannt)</label>
+                        <span class="label-hint">Die Note, die du bereits erhalten hast oder kennst</span>
+                        <div class="input-with-unit">
+                            <input 
+                                type="number" 
+                                id="praktisch" 
+                                placeholder="z.B. 2,0" 
+                                min="1" 
+                                max="6" 
+                                step="0.1"
+                                oninput="updateProgress()"
+                            >
+                            <span class="input-unit">🎯</span>
+                        </div>
+                    </div>
+
                     <div class="button-group">
                         <button class="btn-primary" onclick="goToStep(2)" id="step1Btn" disabled>Weiter →</button>
                     </div>
                 </div>
             </div>
 
-            <!-- STEP 2 -->
+            <!-- STEP 2: Written Exam Estimate -->
             <div id="step2" class="step hidden">
                 <div class="card">
-                    <div class="step-indicator">Schritt 2 von 4</div>
-                    <div class="card-title">✏️ Schriftliche Prüfung</div>
+                    <div class="step-indicator">Schritt 2 von 3</div>
+                    <div class="card-title">✏️ Schriftliche Prüfung schätzen</div>
                     <div class="info-box">
                         Das ist deine <strong>Schätzung</strong> für die schriftliche Prüfung. Du kennst das Ergebnis ja noch nicht - das ist nur eine Vorhersage! Sie zählt normalerweise 30%.
                     </div>
@@ -603,64 +637,33 @@
                 </div>
             </div>
 
-            <!-- STEP 3 -->
+            <!-- STEP 3: Review & Calculate -->
             <div id="step3" class="step hidden">
                 <div class="card">
-                    <div class="step-indicator">Schritt 3 von 4</div>
-                    <div class="card-title">🎤 Praktische Prüfung?</div>
+                    <div class="step-indicator">Schritt 3 von 3</div>
+                    <div class="card-title">🎯 Überprüfung & Berechnung</div>
                     <div class="info-box">
-                        Manche Fächer (z.B. Fremdsprachen, Deutsch) haben eine mündliche oder praktische Prüfung. Andere haben sie nicht.
+                        Überprüfe deine Eingaben. Alles korrekt? Dann können wir deinen voraussichtlichen Notendurchschnitt berechnen!
                     </div>
-                    <div class="form-group">
-                        <label>Hat dein Fach eine Kommunikations-/praktische Prüfung?</label>
-                        <button class="option-button" onclick="selectOption('hasPractical', true, this)">
-                            <span class="option-icon">✅</span>
-                            <span>Ja, mein Fach hat eine</span>
-                        </button>
-                        <button class="option-button" onclick="selectOption('hasPractical', false, this)">
-                            <span class="option-icon">❌</span>
-                            <span>Nein, mein Fach hat keine</span>
-                        </button>
+                    
+                    <div class="breakdown">
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">📌 Jahresleistung</span>
+                            <span class="breakdown-value" id="review-jahresleistung">-</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">✏️ Schriftliche Prüfung (Schätzung)</span>
+                            <span class="breakdown-value" id="review-schriftlich">-</span>
+                        </div>
+                        <div id="review-praktisch-item" class="breakdown-item hidden">
+                            <span class="breakdown-label">🎤 Kommunikation</span>
+                            <span class="breakdown-value" id="review-praktisch">-</span>
+                        </div>
                     </div>
+
                     <div class="button-group">
                         <button class="btn-tertiary" onclick="goToStep(2)">← Zurück</button>
-                        <button class="btn-primary" onclick="goToStep(4)" id="step3Btn" disabled>Weiter →</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- STEP 4 -->
-            <div id="step4" class="step hidden">
-                <div class="card">
-                    <div class="step-indicator">Schritt 4 von 4</div>
-                    <div class="card-title" id="step4Title">🎤 Kommunikationsprüfung</div>
-                    <div class="info-box" id="step4Info">
-                        Das ist deine <strong>Schätzung</strong> für die mündliche/praktische Prüfung. Sie zählt normalerweise 20%.
-                    </div>
-                    <div class="form-group" id="practicalForm">
-                        <label id="practicalLabel">Wie schätzt du dein Ergebnis in der Kommunikationsprüfung ein?</label>
-                        <span class="label-hint">Das ist eine Vermutung basierend auf deiner Vorbereitung</span>
-                        <div class="input-with-unit">
-                            <input 
-                                type="number" 
-                                id="praktisch" 
-                                placeholder="z.B. 2,0" 
-                                min="1" 
-                                max="6" 
-                                step="0.1"
-                                oninput="updateProgress()"
-                            >
-                            <span class="input-unit">🎯</span>
-                        </div>
-                    </div>
-                    <div class="form-group hidden" id="nopracticalForm">
-                        <div class="info-box">
-                            ✅ Dein Fach hat keine praktische Prüfung. Die Berechnung basiert nur auf Jahresleistung und schriftliche Prüfung.
-                        </div>
-                    </div>
-                    <div class="button-group">
-                        <button class="btn-tertiary" onclick="goToStep(3)">← Zurück</button>
-                        <button class="btn-primary" onclick="calculateAndShowResult()" id="step4Btn" disabled>🎉 Ergebnis berechnen</button>
+                        <button class="btn-primary" onclick="calculateAndShowResult()">🎉 Ergebnis berechnen</button>
                     </div>
                 </div>
             </div>
@@ -681,7 +684,7 @@
                             <span class="breakdown-value" id="schriftlichResult">-</span>
                         </div>
                         <div id="praktischResult" class="breakdown-item hidden">
-                            <span class="breakdown-label">🎤 Kommunikation (Schätzung)</span>
+                            <span class="breakdown-label">🎤 Kommunikation</span>
                             <span class="breakdown-value" id="praktischValue">-</span>
                         </div>
                         <div class="breakdown-item" style="border-bottom: 2px solid var(--primary-color); font-weight: 700;">
@@ -791,11 +794,21 @@
                     </div>
                     <div class="faq-answer">
                         Der Rechner führt dich Schritt für Schritt durch deine Daten:<br><br>
-                        1. <strong>Jahresleistung:</strong> Dein Durchschnitt während des ganzen Jahres<br>
-                        2. <strong>Schriftliche Prüfung:</strong> Deine Schätzung für das Ergebnis<br>
-                        3. <strong>Praktische Prüfung:</strong> Ob es eine gibt<br>
-                        4. <strong>Kommunikationsprüfung:</strong> Falls vorhanden, deine Schätzung<br><br>
+                        1. <strong>Jahresleistung & Praktische Prüfung:</strong> Trage deine bekannten Noten ein<br>
+                        2. <strong>Schriftliche Prüfung:</strong> Schätze dein Ergebnis<br>
+                        3. <strong>Überprüfung:</strong> Kontrolliere deine Eingaben<br><br>
                         Dann berechnet er mit der Gewichtung deine voraussichtliche Endnote.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Was ist der Unterschied zu vorher?
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <strong>Neu:</strong> Du gibst jetzt zuerst deine bekannten Noten ein (Jahresleistung und praktische Prüfung). Danach schätzt du nur noch die schriftliche Prüfung. Das ist viel schneller und genauer!<br><br>
+                        <strong>Früher:</strong> Du musstest alle Noten schätzen.
                     </div>
                 </div>
 
@@ -805,7 +818,7 @@
                         <span class="chevron">▼</span>
                     </div>
                     <div class="faq-answer">
-                        Du kennst die Ergebnisse deiner Prüfungen noch nicht! Das Tool soll dir helfen, eine <strong>Vermutung</strong> aufzustellen, wie gut/schlecht du wahrscheinlich abschneiden wirst. Basierend darauf kannst du überlegen, wie viel du noch lernen musst.<br><br>
+                        Du kennst die Ergebnisse deiner Prüfungen noch nicht! Das Tool soll dir helfen, eine <strong>Vermutung</strong> aufzustellen, wie gut/schlecht du wahrscheinlich abschneidest.<br><br>
                         Es ist nicht exakt - es ist eine Hilfe für deine Planung!
                     </div>
                 </div>
@@ -830,7 +843,7 @@
                         <span class="chevron">▼</span>
                     </div>
                     <div class="faq-answer">
-                        <strong>Ja!</strong> Gehe zum Reiter "Gewichtung" und ändere die Prozentsätze nach deinen Vorgaben. Manche Schulen/Bundesländer haben andere Gewichtungen. Du kannst alles anpassen - die Summe muss nur 100% sein.
+                        <strong>Ja!</strong> Gehe zum Reiter "Gewichtung" und ändere die Prozentsätze nach deinen Vorgaben. Manche Schulen/Bundesländer haben andere Gewichtungen. Du kannst alles anpassen!
                     </div>
                 </div>
 
@@ -841,9 +854,9 @@
                     </div>
                     <div class="faq-answer">
                         <strong>Strategie:</strong><br>
-                        • Die <strong>Jahresleistung</strong> zählt am meisten (50%) - Konzentriere dich auf Mitarbeit!<br>
-                        • Die <strong>schriftliche Prüfung</strong> zählt 30% - Intensives Lernen zahlt sich aus!<br>
-                        • Die <strong>Kommunikation</strong> zählt 20% - Übe Sprachpraxis!<br><br>
+                        • Die <strong>Jahresleistung</strong> ist bereits bekannt - konzentriere dich auf die Prüfungen!<br>
+                        • Die <strong>schriftliche Prüfung</strong> zählt viel - intensives Lernen zahlt sich aus!<br>
+                        • Die <strong>Kommunikation</strong> auch - Übe Sprachpraxis!<br><br>
                         Nutze den Rechner, um zu sehen, wo du noch zulegen kannst!
                     </div>
                 </div>
@@ -866,7 +879,7 @@
                         <span class="chevron">▼</span>
                     </div>
                     <div class="faq-answer">
-                        Der Rechner speichert deine Gewichtung automatisch im Browser. Wenn du die Seite neu öffnest, sind deine Einstellungen noch da. Die Noten werden zurückgesetzt, damit du immer frisch anfangen kannst!
+                        Der Rechner speichert deine Gewichtung automatisch im Browser. Wenn du die Seite neu öffnest, sind deine Einstellungen noch da. Die Noten werden zurückgesetzt, damit du neu berechnen kannst.
                     </div>
                 </div>
             </div>
@@ -888,6 +901,14 @@
                 updateWeightDisplay();
             }
         });
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
 
         function updateWeightDisplay() {
             const j = parseFloat(document.getElementById('weightJahresleistung').value) || 0;
@@ -938,45 +959,67 @@
 
         function selectOption(name, value, element) {
             hasPractical = value;
-            document.querySelectorAll('.option-button').forEach(btn => btn.classList.remove('selected'));
+            document.querySelectorAll('.option-button').forEach(btn => {
+                if (btn.parentElement === element.parentElement) {
+                    btn.classList.remove('selected');
+                }
+            });
             element.classList.add('selected');
-            document.getElementById('step3Btn').disabled = false;
-
+            
             if (value) {
-                document.getElementById('step4Title').textContent = '🎤 Kommunikationsprüfung';
-                document.getElementById('step4Info').innerHTML = 'Das ist deine <strong>Schätzung</strong> für die mündliche/praktische Prüfung. Sie zählt normalerweise 20%.';
-                document.getElementById('practicalForm').classList.remove('hidden');
-                document.getElementById('nopracticalForm').classList.add('hidden');
+                document.getElementById('praktischInputForm').classList.remove('hidden');
             } else {
-                document.getElementById('step4Title').textContent = '✅ Bestätigung';
-                document.getElementById('step4Info').innerHTML = 'Super! Dein Fach hat keine praktische Prüfung. Die Berechnung basiert auf Jahresleistung und schriftliche Prüfung.';
-                document.getElementById('practicalForm').classList.add('hidden');
-                document.getElementById('nopracticalForm').classList.remove('hidden');
+                document.getElementById('praktischInputForm').classList.add('hidden');
                 document.getElementById('praktisch').value = '';
             }
+            
+            updateProgress();
         }
 
         function updateProgress() {
             const jahr = document.getElementById('jahresleistung').value;
             const schrift = document.getElementById('schriftlich').value;
+            const praktisch = document.getElementById('praktisch').value;
 
-            document.getElementById('step1Btn').disabled = !jahr;
+            // Step 1: Jahresleistung + hasPractical selected
+            const step1Valid = jahr && hasPractical !== null && (hasPractical === false || praktisch);
+            document.getElementById('step1Btn').disabled = !step1Valid;
+
+            // Step 2: Schriftlich filled
             document.getElementById('step2Btn').disabled = !schrift;
 
-            if (hasPractical === null) {
-                document.getElementById('step4Btn').disabled = true;
-            } else if (hasPractical === true) {
-                const praktisch = document.getElementById('praktisch').value;
-                document.getElementById('step4Btn').disabled = !praktisch;
-            } else {
-                document.getElementById('step4Btn').disabled = false;
-            }
-
-            const progress = (currentStep / 4) * 100;
+            const progress = (currentStep / 3) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
         }
 
         function goToStep(step) {
+            // Validate before moving
+            if (step === 2) {
+                const jahr = document.getElementById('jahresleistung').value;
+                const praktisch = document.getElementById('praktisch').value;
+                if (!jahr || hasPractical === null || (hasPractical === true && !praktisch)) {
+                    alert('Bitte fülle alle Felder aus!');
+                    return;
+                }
+            }
+
+            if (step === 3) {
+                const schrift = document.getElementById('schriftlich').value;
+                if (!schrift) {
+                    alert('Bitte fülle alle Felder aus!');
+                    return;
+                }
+                // Update review
+                document.getElementById('review-jahresleistung').textContent = document.getElementById('jahresleistung').value;
+                document.getElementById('review-schriftlich').textContent = document.getElementById('schriftlich').value;
+                if (hasPractical) {
+                    document.getElementById('review-praktisch-item').classList.remove('hidden');
+                    document.getElementById('review-praktisch').textContent = document.getElementById('praktisch').value;
+                } else {
+                    document.getElementById('review-praktisch-item').classList.add('hidden');
+                }
+            }
+
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById('step' + step).classList.add('active');
             currentStep = step;
@@ -999,120 +1042,58 @@
 
             if (hasPractical) {
                 praktisch = parseFloat(document.getElementById('praktisch').value);
-                const wJ = weights.jahresleistung / 100;
-                const wS = weights.schriftlich / 100;
-                const wP = weights.praktisch / 100;
-                finalGrade = (jahresleistung * wJ) + (schriftlich * wS) + (praktisch * wP);
+                const totalWeight = weights.jahresleistung + weights.schriftlich + weights.praktisch;
+                finalGrade = (jahresleistung * weights.jahresleistung + schriftlich * weights.schriftlich + praktisch * weights.praktisch) / totalWeight;
             } else {
-                const wJ = weights.jahresleistung / 100;
-                const wS = weights.schriftlich / 100;
-                const total = wJ + wS;
-                finalGrade = ((jahresleistung * wJ) + (schriftlich * wS)) / total;
+                const totalWeight = weights.jahresleistung + weights.schriftlich;
+                finalGrade = (jahresleistung * weights.jahresleistung + schriftlich * weights.schriftlich) / totalWeight;
             }
 
             finalGrade = Math.round(finalGrade * 10) / 10;
 
-            document.getElementById('finalGrade').textContent = finalGrade;
-            document.getElementById('jahresleistungResult').textContent = jahresleistung;
-            document.getElementById('schriftlichResult').textContent = schriftlich;
+            // Display results
+            document.getElementById('finalGrade').textContent = finalGrade.toFixed(1);
+            document.getElementById('jahresleistungResult').textContent = jahresleistung.toFixed(1);
+            document.getElementById('schriftlichResult').textContent = schriftlich.toFixed(1);
 
             if (hasPractical) {
                 document.getElementById('praktischResult').classList.remove('hidden');
-                document.getElementById('praktischValue').textContent = praktisch;
-                document.getElementById('weightInfo').innerHTML = `${weights.jahresleistung}% + ${weights.schriftlich}% + ${weights.praktisch}%`;
+                document.getElementById('praktischValue').textContent = praktisch.toFixed(1);
             } else {
                 document.getElementById('praktischResult').classList.add('hidden');
-                const adjustedJ = (weights.jahresleistung / (weights.jahresleistung + weights.schriftlich) * 100).toFixed(0);
-                const adjustedS = (weights.schriftlich / (weights.jahresleistung + weights.schriftlich) * 100).toFixed(0);
-                document.getElementById('weightInfo').innerHTML = `${adjustedJ}% + ${adjustedS}% (angepasst)`;
             }
 
-            updateGradeBadge(finalGrade);
-            generateAdvice(jahresleistung, schriftlich, praktisch, hasPractical, finalGrade);
+            // Grade badge
+            const gradeClass = 'grade-' + Math.ceil(finalGrade);
+            document.getElementById('gradeBadge').innerHTML = `<span class="grade-badge ${gradeClass}">Note: ${finalGrade.toFixed(1)}</span>`;
 
-            document.getElementById('resultSection').classList.remove('hidden');
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            window.scrollTo(0, 0);
-        }
+            // Weight info
+            const weightText = hasPractical ? 
+                `${weights.jahresleistung}% + ${weights.schriftlich}% + ${weights.praktisch}%` :
+                `${weights.jahresleistung}% + ${weights.schriftlich}%`;
+            document.getElementById('weightInfo').textContent = weightText;
 
-        function updateGradeBadge(grade) {
-            const badge = document.getElementById('gradeBadge');
-            let badgeClass = '';
-            let badgeText = '';
-
-            if (grade <= 1.5) {
-                badgeClass = 'grade-1';
-                badgeText = '🌟 Sehr Gut!';
-            } else if (grade <= 2.5) {
-                badgeClass = 'grade-2';
-                badgeText = '✅ Gut!';
-            } else if (grade <= 3.5) {
-                badgeClass = 'grade-3';
-                badgeText = '👍 Befriedigend';
-            } else if (grade <= 4.5) {
-                badgeClass = 'grade-4';
-                badgeText = '⚠️ Ausreichend';
-            } else if (grade <= 5.5) {
-                badgeClass = 'grade-5';
-                badgeText = '❌ Mangelhaft';
-            } else {
-                badgeClass = 'grade-6';
-                badgeText = '🚨 Ungenügend';
-            }
-
-            badge.innerHTML = `<span class="grade-badge ${badgeClass}">${badgeText}</span>`;
-        }
-
-        function generateAdvice(jahresleistung, schriftlich, praktisch, hasPractical, finalGrade) {
-            const adviceContent = document.getElementById('adviceContent');
+            // Advice
             let advice = '';
-
-            if (finalGrade <= 2.0) {
-                advice += '<div class="success-badge">🎉 Sehr gut! Du hast eine super Note zu erwarten! Weiter so!</div>';
-            } else if (finalGrade <= 3.0) {
-                advice += '<div class="success-badge">✅ Gute Chancen! Du solltest eine solide Note bekommen.</div>';
-            } else if (finalGrade <= 4.0) {
-                advice += '<div class="warning-badge">⚠️ Es wird knapp! Die Note ist ausreichend, aber du solltest noch lernen.</div>';
+            if (finalGrade <= 1.5) {
+                advice = '🌟 <strong>Ausgezeichnet!</strong> Du machst das wirklich sehr gut. Gratuliere dir selbst!';
+            } else if (finalGrade <= 2.5) {
+                advice = '😊 <strong>Sehr gut gemacht!</strong> Du bist auf einem guten Weg. Konzentriere dich in der schriftlichen Prüfung!';
+            } else if (finalGrade <= 3.5) {
+                advice = '👍 <strong>Gut!</strong> Du hast eine faire Chance. Mit noch mehr Lernen kannst du dich verbessern!';
+            } else if (finalGrade <= 4.5) {
+                advice = '⚠️ <strong>Es wird knapp!</strong> Du solltest intensiv für die schriftliche Prüfung lernen, um deine Note zu verbessern!';
             } else {
-                advice += '<div class="danger-badge">🚨 Kritisch! Du solltest jetzt intensiv lernen!</div>';
+                advice = '🚨 <strong>Aufgepasst!</strong> Es ist kritisch. Konzentriere dich mit voller Kraft auf die Prüfung. Du packst das!';
             }
 
-            advice += '<br><br><strong>📊 Wo kannst du noch zulegen?</strong><br>';
+            document.getElementById('adviceContent').innerHTML = `<div class="info-box">${advice}</div>`;
 
-            if (jahresleistung >= 4.0) {
-                advice += '📌 <strong>Jahresleistung (zählt 50%):</strong> Das ist deine Schwachstelle! Konzentriere dich auf bessere Mitarbeit in den letzten Wochen!<br>';
-            } else if (jahresleistung >= 3.0) {
-                advice += '📌 <strong>Jahresleistung:</strong> Ganz solide - da ist noch ein wenig Luft nach oben!<br>';
-            } else {
-                advice += '📌 <strong>Jahresleistung:</strong> Sehr gut! Das ist eine starke Basis!<br>';
-            }
-
-            if (schriftlich >= 4.0) {
-                advice += '✏️ <strong>Schriftliche Prüfung (zählt 30%):</strong> Hier solltest du gezielt lernen! Das bringt dir die meisten Punkte!<br>';
-            } else if (schriftlich >= 3.0) {
-                advice += '✏️ <strong>Schriftliche Prüfung:</strong> Deine Schätzung ist realistisch - ein bisschen Lernzeit mehr könnte helfen!<br>';
-            } else {
-                advice += '✏️ <strong>Schriftliche Prüfung:</strong> Sehr gute Vorbereitung - du bist auf gutem Weg!<br>';
-            }
-
-            if (hasPractical) {
-                if (praktisch >= 4.0) {
-                    advice += '🎤 <strong>Kommunikation (zählt 20%):</strong> Übe deine Sprachpraxis! Jede Note zählt!<br>';
-                } else if (praktisch >= 3.0) {
-                    advice += '🎤 <strong>Kommunikation:</strong> Gute Vorhersage! Ein bisschen Üben könnte noch helfen!<br>';
-                } else {
-                    advice += '🎤 <strong>Kommunikation:</strong> Ausgezeichnet! Du bist gut vorbereitet!<br>';
-                }
-            }
-
-            advice += '<br><strong>💪 Nächste Schritte:</strong><br>';
-            if (finalGrade > 3.5) {
-                advice += '1. Mache einen Lernplan für die nächsten Tage<br>2. Konzentriere dich auf die schwächeren Bereiche<br>3. Bilde Lerngruppen mit Mitschülern<br>4. Nutze Online-Ressourcen und Videos<br>5. Sprich mit deinem Lehrer um Tipps';
-            } else {
-                advice += '1. Du bist auf sehr gutem Weg - bleib dran!<br>2. Wiederhole die Hauptthemen kurz vor der Prüfung<br>3. Sei zuversichtlich - du schaffst das!';
-            }
-
-            adviceContent.innerHTML = advice;
+            // Hide steps, show results
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('resultSection').classList.remove('hidden');
+            updateProgress();
+            window.scrollTo(0, 0);
         }
 
         function resetWizard() {
@@ -1121,43 +1102,23 @@
             document.getElementById('praktisch').value = '';
             hasPractical = null;
             currentStep = 1;
+
+            document.querySelectorAll('.option-button').forEach(btn => btn.classList.remove('selected'));
+            document.getElementById('praktischInputForm').classList.add('hidden');
+            document.getElementById('resultSection').classList.add('hidden');
+
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById('step1').classList.add('active');
-            document.getElementById('resultSection').classList.add('hidden');
-            document.querySelectorAll('.option-button').forEach(btn => btn.classList.remove('selected'));
+
             updateProgress();
             window.scrollTo(0, 0);
         }
 
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-
-            document.getElementById(tabName).classList.add('active');
-            event.target?.classList.add('active');
-            window.scrollTo(0, 0);
-        }
-
         function toggleFAQ(element) {
-            const faqItem = element.parentElement;
-            const answer = faqItem.querySelector('.faq-answer');
-
-            document.querySelectorAll('.faq-item').forEach(item => {
-                if (item !== faqItem) {
-                    item.classList.remove('active');
-                    item.querySelector('.faq-answer').classList.remove('active');
-                }
-            });
-
-            faqItem.classList.toggle('active');
-            answer.classList.toggle('active');
+            const item = element.parentElement;
+            item.classList.toggle('active');
+            item.querySelector('.faq-answer').classList.toggle('active');
         }
-
-        updateProgress();
     </script>
 </body>
 </html>
