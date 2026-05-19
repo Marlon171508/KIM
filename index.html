@@ -14,17 +14,12 @@
         :root {
             --primary-color: #6366f1;
             --primary-dark: #4f46e5;
-            --primary-light: #818cf8;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
             --light-bg: #f8fafc;
             --card-bg: #ffffff;
             --text-primary: #1e293b;
             --text-secondary: #64748b;
             --border-color: #e2e8f0;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 10px 13px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.1);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
         }
 
         body {
@@ -36,107 +31,86 @@
         }
 
         .container {
-            max-width: 550px;
+            max-width: 500px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
             color: white;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             padding: 1rem 0;
         }
 
         header h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
         }
 
         header p {
-            font-size: 0.95rem;
-            opacity: 0.95;
-        }
-
-        .progress-bar {
-            background: rgba(255, 255, 255, 0.3);
-            height: 6px;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            background: white;
-            height: 100%;
-            transition: width 0.4s ease;
-            border-radius: 10px;
+            font-size: 0.9rem;
+            opacity: 0.9;
         }
 
         .card {
             background: var(--card-bg);
             border-radius: 16px;
             padding: 2rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             box-shadow: var(--shadow);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .card-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .step-indicator {
-            background: var(--light-bg);
-            color: var(--text-secondary);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
+            font-size: 1.3rem;
             font-weight: 600;
+            color: var(--text-primary);
             margin-bottom: 1.5rem;
-            display: inline-block;
         }
 
         .form-group {
-            margin-bottom: 1.75rem;
+            margin-bottom: 1.5rem;
         }
 
         label {
             display: block;
-            margin-bottom: 0.75rem;
-            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
             color: var(--text-primary);
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         .label-hint {
             display: block;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
             font-weight: 400;
-            margin-top: 0.25rem;
+            margin-top: 0.2rem;
         }
 
-        input[type="number"],
-        input[type="text"],
-        select {
+        input[type="number"] {
             width: 100%;
-            padding: 1rem;
+            padding: 0.9rem;
             border: 2px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 10px;
             font-size: 1rem;
             transition: all 0.3s ease;
             font-family: inherit;
         }
 
-        input[type="number"]:focus,
-        input[type="text"]:focus,
-        select:focus {
+        input[type="number"]:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
@@ -153,31 +127,31 @@
             transform: translateY(-50%);
             color: var(--text-secondary);
             font-weight: 600;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             pointer-events: none;
         }
 
         .input-with-unit input {
-            padding-right: 3.5rem;
+            padding-right: 3rem;
         }
 
         .button-group {
             display: flex;
-            gap: 1rem;
-            margin-top: 2.5rem;
+            gap: 0.75rem;
+            margin-top: 2rem;
         }
 
         button {
             flex: 1;
-            padding: 1.1rem;
+            padding: 0.95rem;
             border: none;
-            border-radius: 12px;
-            font-size: 1rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
 
         .btn-primary {
@@ -188,11 +162,11 @@
 
         .btn-primary:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
         }
 
         .btn-primary:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
         }
 
@@ -207,32 +181,21 @@
             color: white;
         }
 
-        .btn-tertiary {
-            background: transparent;
-            color: var(--text-secondary);
-            border: 2px solid var(--border-color);
-        }
-
-        .btn-tertiary:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-
         .option-button {
             width: 100%;
-            padding: 1.25rem;
-            margin-bottom: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 0.6rem;
             border: 2px solid var(--border-color);
             background: white;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 500;
             text-align: left;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.8rem;
         }
 
         .option-button:hover {
@@ -247,128 +210,7 @@
         }
 
         .option-icon {
-            font-size: 1.5rem;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            background: var(--light-bg);
-            padding: 0.5rem;
-            border-radius: 10px;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 0.75rem;
-            border: none;
-            background: transparent;
-            color: var(--text-secondary);
-            cursor: pointer;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .tab-btn.active {
-            background: white;
-            color: var(--primary-color);
-            box-shadow: var(--shadow);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .result-card {
-            background: linear-gradient(135deg, #f0f9ff, #f8fafc);
-            border: 2px solid var(--primary-light);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .result-label {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .result-value {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .grade-badge {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            margin-top: 1rem;
-        }
-
-        .grade-1 { background: #dcfce7; color: #166534; }
-        .grade-2 { background: #dbeafe; color: #0c4a6e; }
-        .grade-3 { background: #fef3c7; color: #78350f; }
-        .grade-4 { background: #fed7aa; color: #7c2d12; }
-        .grade-5 { background: #fecaca; color: #7f1d1d; }
-        .grade-6 { background: #f8bfbf; color: #600; }
-
-        .breakdown {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            border: 1px solid var(--border-color);
-        }
-
-        .breakdown-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .breakdown-item:last-child {
-            margin-bottom: 0;
-            border-bottom: none;
-        }
-
-        .breakdown-label {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        .breakdown-value {
-            font-weight: 700;
-            color: var(--text-primary);
-            font-size: 1.1rem;
-        }
-
-        .info-box {
-            background: #f0f9ff;
-            border-left: 4px solid var(--primary-color);
-            padding: 1.25rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .info-box strong {
-            color: var(--text-primary);
+            font-size: 1.3rem;
         }
 
         .hidden {
@@ -383,118 +225,91 @@
             display: block;
         }
 
-        .success-badge {
-            background: #dcfce7;
-            color: #166534;
-            padding: 1rem;
-            border-radius: 12px;
-            margin-top: 1rem;
-            font-size: 0.95rem;
-            border-left: 4px solid var(--success-color);
-            line-height: 1.6;
-        }
-
-        .warning-badge {
-            background: #fef3c7;
-            color: #92400e;
-            padding: 1rem;
-            border-radius: 12px;
-            margin-top: 1rem;
-            font-size: 0.95rem;
-            border-left: 4px solid var(--warning-color);
-            line-height: 1.6;
-        }
-
-        .danger-badge {
-            background: #fee2e2;
-            color: #991b1b;
-            padding: 1rem;
-            border-radius: 12px;
-            margin-top: 1rem;
-            font-size: 0.95rem;
-            border-left: 4px solid var(--danger-color);
-            line-height: 1.6;
-        }
-
-        .faq-item {
+        .result-card {
+            background: linear-gradient(135deg, #f0f9ff, #f8fafc);
+            border: 2px solid var(--primary-color);
+            border-radius: 16px;
+            padding: 2rem;
             margin-bottom: 1rem;
+            text-align: center;
         }
 
-        .faq-question {
-            background: var(--light-bg);
-            padding: 1.25rem;
-            border-radius: 10px;
-            cursor: pointer;
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .grade-badge {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
             font-weight: 600;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            margin-top: 0.8rem;
+        }
+
+        .grade-1 { background: #dcfce7; color: #166534; }
+        .grade-2 { background: #dbeafe; color: #0c4a6e; }
+        .grade-3 { background: #fef3c7; color: #78350f; }
+        .grade-4 { background: #fed7aa; color: #7c2d12; }
+        .grade-5 { background: #fecaca; color: #7f1d1d; }
+        .grade-6 { background: #f8bfbf; color: #600; }
+
+        .breakdown {
+            background: white;
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-top: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .breakdown-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
         }
 
-        .faq-question:hover {
-            background: var(--primary-light);
-            color: white;
+        .breakdown-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
         }
 
-        .faq-answer {
-            background: white;
-            padding: 1.25rem;
-            border-radius: 0 0 10px 10px;
+        .breakdown-label {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            display: none;
         }
 
-        .faq-answer.active {
-            display: block;
-        }
-
-        .chevron {
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .chevron {
-            transform: rotate(180deg);
-        }
-
-        .settings-section {
-            background: var(--light-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-        }
-
-        .settings-title {
+        .breakdown-value {
             font-weight: 700;
-            margin-bottom: 1rem;
             color: var(--text-primary);
         }
 
-        .weight-input-group {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-end;
-        }
-
-        .weight-input {
-            flex: 1;
-        }
-
-        .weight-input input {
-            padding: 0.75rem;
-            font-size: 0.95rem;
-        }
-
-        .weight-display {
-            background: var(--card-bg);
-            padding: 0.75rem 1rem;
+        .info-box {
+            background: #f0f9ff;
+            border-left: 3px solid var(--primary-color);
+            padding: 0.95rem;
             border-radius: 8px;
-            font-weight: 600;
-            color: var(--primary-color);
-            white-space: nowrap;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .advice-content {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-primary);
         }
 
         @media (max-width: 600px) {
@@ -504,7 +319,6 @@
 
             .card {
                 padding: 1.5rem;
-                margin-bottom: 1rem;
             }
 
             .result-value {
@@ -512,8 +326,8 @@
             }
 
             button {
-                padding: 0.95rem;
-                font-size: 0.9rem;
+                padding: 0.85rem;
+                font-size: 0.85rem;
             }
 
             .button-group {
@@ -526,35 +340,17 @@
     <div class="container">
         <header>
             <h1>📚 Notenschnitt-Rechner</h1>
-            <p>Dein persönliches Prüfungs-Tool</p>
+            <p>Einfach & entspannt</p>
         </header>
 
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-        </div>
-
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('wizard')">📝 Rechner</button>
-            <button class="tab-btn" onclick="switchTab('settings')">⚙️ Gewichtung</button>
-            <button class="tab-btn" onclick="switchTab('faq')">❓ Hilfe</button>
-        </div>
-
-        <!-- WIZARD TAB -->
-        <div id="wizard" class="tab-content active">
-            
-            <!-- STEP 1: Known Values -->
+        <div id="wizard">
+            <!-- STEP 1: Jahresleistung -->
             <div id="step1" class="step active">
                 <div class="card">
-                    <div class="step-indicator">Schritt 1 von 3</div>
-                    <div class="card-title">📌 Bekannte Noten eingeben</div>
-                    <div class="info-box">
-                        Gib hier deine bereits bekannten Noten ein: Jahresleistung und die Kommunikations-/Praxisprüfung (falls vorhanden).
-                    </div>
-
-                    <!-- Jahresleistung -->
+                    <div class="card-title">📝 Jahresleistung</div>
                     <div class="form-group">
-                        <label>Jahresleistung (bekannt)</label>
-                        <span class="label-hint">Dein Durchschnitt aus dem ganzen Schuljahr</span>
+                        <label>Deine Note aus dem Schuljahr</label>
+                        <span class="label-hint">Dein Durchschnitt aus Mitarbeit, Tests, Arbeiten, etc.</span>
                         <div class="input-with-unit">
                             <input 
                                 type="number" 
@@ -563,29 +359,48 @@
                                 min="1" 
                                 max="6" 
                                 step="0.1"
-                                oninput="updateProgress()"
+                                oninput="validateStep1()"
                             >
-                            <span class="input-unit">📝</span>
+                            <span class="input-unit">📌</span>
                         </div>
                     </div>
+                    <div class="button-group">
+                        <button class="btn-primary" onclick="goToStep(2)" id="step1Btn" disabled>Weiter →</button>
+                    </div>
+                </div>
+            </div>
 
-                    <!-- Praktische Prüfung vorhanden? -->
+            <!-- STEP 2: Praktische Prüfung? -->
+            <div id="step2" class="step hidden">
+                <div class="card">
+                    <div class="card-title">🎤 Praktische Prüfung?</div>
+                    <div class="info-box">
+                        Hat dein Fach eine Kommunikations- oder praktische Prüfung?
+                    </div>
                     <div class="form-group">
-                        <label>Hat dein Fach eine Kommunikations-/praktische Prüfung?</label>
-                        <button class="option-button" onclick="selectOption('hasPractical', true, this)">
+                        <button class="option-button" onclick="selectPractical(true, this)">
                             <span class="option-icon">✅</span>
                             <span>Ja, mein Fach hat eine</span>
                         </button>
-                        <button class="option-button" onclick="selectOption('hasPractical', false, this)">
+                        <button class="option-button" onclick="selectPractical(false, this)">
                             <span class="option-icon">❌</span>
                             <span>Nein, mein Fach hat keine</span>
                         </button>
                     </div>
+                    <div class="button-group">
+                        <button class="btn-secondary" onclick="goToStep(1)">← Zurück</button>
+                        <button class="btn-primary" onclick="goToStep(3)" id="step2Btn" disabled>Weiter →</button>
+                    </div>
+                </div>
+            </div>
 
-                    <!-- Praktische Prüfung Note (conditional) -->
-                    <div class="form-group hidden" id="praktischInputForm">
-                        <label>Kommunikations-/Praxisprüfung Note (bekannt)</label>
-                        <span class="label-hint">Die Note, die du bereits erhalten hast oder kennst</span>
+            <!-- STEP 3: Praktische Note (conditional) -->
+            <div id="step3" class="step hidden">
+                <div class="card">
+                    <div class="card-title">🎯 Praxisnote</div>
+                    <div class="form-group">
+                        <label>Deine Note aus der Kommunikationsprüfung</label>
+                        <span class="label-hint">Die Note, die du bereits bekommen hast</span>
                         <div class="input-with-unit">
                             <input 
                                 type="number" 
@@ -594,29 +409,28 @@
                                 min="1" 
                                 max="6" 
                                 step="0.1"
-                                oninput="updateProgress()"
+                                oninput="validateStep3()"
                             >
-                            <span class="input-unit">🎯</span>
+                            <span class="input-unit">🎤</span>
                         </div>
                     </div>
-
                     <div class="button-group">
-                        <button class="btn-primary" onclick="goToStep(2)" id="step1Btn" disabled>Weiter →</button>
+                        <button class="btn-secondary" onclick="goToStep(2)">← Zurück</button>
+                        <button class="btn-primary" onclick="goToStep(4)" id="step3Btn" disabled>Weiter →</button>
                     </div>
                 </div>
             </div>
 
-            <!-- STEP 2: Written Exam Estimate -->
-            <div id="step2" class="step hidden">
+            <!-- STEP 4: Schriftliche Prüfung (Schätzung) -->
+            <div id="step4" class="step hidden">
                 <div class="card">
-                    <div class="step-indicator">Schritt 2 von 3</div>
-                    <div class="card-title">✏️ Schriftliche Prüfung schätzen</div>
+                    <div class="card-title">✏️ Schriftliche Prüfung (Schätzung)</div>
                     <div class="info-box">
-                        Das ist deine <strong>Schätzung</strong> für die schriftliche Prüfung. Du kennst das Ergebnis ja noch nicht - das ist nur eine Vorhersage! Sie zählt normalerweise 30%.
+                        Das ist deine <strong>Schätzung</strong>. Du kennst das Ergebnis ja noch nicht!
                     </div>
                     <div class="form-group">
-                        <label>Wie schätzt du dein Ergebnis in der schriftlichen Prüfung ein?</label>
-                        <span class="label-hint">Das ist eine Vermutung basierend auf deiner Vorbereitung</span>
+                        <label>Wie schätzt du dein Ergebnis?</label>
+                        <span class="label-hint">Eine ehrliche Vermutung basierend auf deiner Vorbereitung</span>
                         <div class="input-with-unit">
                             <input 
                                 type="number" 
@@ -625,45 +439,14 @@
                                 min="1" 
                                 max="6" 
                                 step="0.1"
-                                oninput="updateProgress()"
+                                oninput="validateStep4()"
                             >
                             <span class="input-unit">📊</span>
                         </div>
                     </div>
                     <div class="button-group">
-                        <button class="btn-tertiary" onclick="goToStep(1)">← Zurück</button>
-                        <button class="btn-primary" onclick="goToStep(3)" id="step2Btn" disabled>Weiter →</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- STEP 3: Review & Calculate -->
-            <div id="step3" class="step hidden">
-                <div class="card">
-                    <div class="step-indicator">Schritt 3 von 3</div>
-                    <div class="card-title">🎯 Überprüfung & Berechnung</div>
-                    <div class="info-box">
-                        Überprüfe deine Eingaben. Alles korrekt? Dann können wir deinen voraussichtlichen Notendurchschnitt berechnen!
-                    </div>
-                    
-                    <div class="breakdown">
-                        <div class="breakdown-item">
-                            <span class="breakdown-label">📌 Jahresleistung</span>
-                            <span class="breakdown-value" id="review-jahresleistung">-</span>
-                        </div>
-                        <div class="breakdown-item">
-                            <span class="breakdown-label">✏️ Schriftliche Prüfung (Schätzung)</span>
-                            <span class="breakdown-value" id="review-schriftlich">-</span>
-                        </div>
-                        <div id="review-praktisch-item" class="breakdown-item hidden">
-                            <span class="breakdown-label">🎤 Kommunikation</span>
-                            <span class="breakdown-value" id="review-praktisch">-</span>
-                        </div>
-                    </div>
-
-                    <div class="button-group">
-                        <button class="btn-tertiary" onclick="goToStep(2)">← Zurück</button>
-                        <button class="btn-primary" onclick="calculateAndShowResult()">🎉 Ergebnis berechnen</button>
+                        <button class="btn-secondary" onclick="goBack()">← Zurück</button>
+                        <button class="btn-primary" onclick="calculateAndShowResult()" id="step4Btn" disabled>🎉 Berechnen</button>
                     </div>
                 </div>
             </div>
@@ -687,200 +470,15 @@
                             <span class="breakdown-label">🎤 Kommunikation</span>
                             <span class="breakdown-value" id="praktischValue">-</span>
                         </div>
-                        <div class="breakdown-item" style="border-bottom: 2px solid var(--primary-color); font-weight: 700;">
-                            <span class="breakdown-label">Gewichtung nach deinen Einstellungen</span>
-                            <span id="weightInfo"></span>
-                        </div>
                     </div>
                 </div>
 
                 <div class="card">
-                    <div class="card-title">💡 Deine Analyse</div>
-                    <div id="adviceContent"></div>
+                    <div class="advice-content" id="adviceContent"></div>
                 </div>
 
                 <div class="button-group">
                     <button class="btn-secondary" onclick="resetWizard()">🔄 Neu berechnen</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- SETTINGS TAB -->
-        <div id="settings" class="tab-content">
-            <div class="card">
-                <div class="card-title">⚙️ Gewichtung anpassen</div>
-                <div class="info-box">
-                    Du kannst hier die Gewichtung der einzelnen Komponenten nach deinen Vorgaben anpassen. Die Summe muss 100% ergeben.
-                </div>
-
-                <div class="settings-section">
-                    <div class="settings-title">📌 Jahresleistung</div>
-                    <div class="weight-input-group">
-                        <div class="weight-input">
-                            <input 
-                                type="number" 
-                                id="weightJahresleistung" 
-                                value="50" 
-                                min="0" 
-                                max="100" 
-                                step="1"
-                                oninput="updateWeightDisplay()"
-                            >
-                        </div>
-                        <div class="weight-display" id="displayJahresleistung">50%</div>
-                    </div>
-                </div>
-
-                <div class="settings-section">
-                    <div class="settings-title">✏️ Schriftliche Prüfung</div>
-                    <div class="weight-input-group">
-                        <div class="weight-input">
-                            <input 
-                                type="number" 
-                                id="weightSchriftlich" 
-                                value="30" 
-                                min="0" 
-                                max="100" 
-                                step="1"
-                                oninput="updateWeightDisplay()"
-                            >
-                        </div>
-                        <div class="weight-display" id="displaySchriftlich">30%</div>
-                    </div>
-                </div>
-
-                <div class="settings-section">
-                    <div class="settings-title">🎤 Kommunikationsprüfung</div>
-                    <div class="weight-input-group">
-                        <div class="weight-input">
-                            <input 
-                                type="number" 
-                                id="weightPraktisch" 
-                                value="20" 
-                                min="0" 
-                                max="100" 
-                                step="1"
-                                oninput="updateWeightDisplay()"
-                            >
-                        </div>
-                        <div class="weight-display" id="displayPraktisch">20%</div>
-                    </div>
-                </div>
-
-                <div class="info-box" style="margin-top: 1.5rem;">
-                    <strong>Gesamtsumme:</strong> <span id="totalWeight">100</span>%
-                </div>
-
-                <div id="weightWarning" class="warning-badge hidden" style="margin-top: 1rem;">
-                    ⚠️ Die Summe muss genau 100% sein! Aktuell: <span id="weightWarningValue">100</span>%
-                </div>
-
-                <div class="button-group" style="margin-top: 2rem;">
-                    <button class="btn-secondary" onclick="resetWeights()">↻ Zurücksetzen</button>
-                    <button class="btn-primary" onclick="saveWeights()">💾 Speichern</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- FAQ TAB -->
-        <div id="faq" class="tab-content">
-            <div class="card">
-                <div class="card-title">❓ Häufig gestellte Fragen</div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        Wie funktioniert dieser Rechner?
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Der Rechner führt dich Schritt für Schritt durch deine Daten:<br><br>
-                        1. <strong>Jahresleistung & Praktische Prüfung:</strong> Trage deine bekannten Noten ein<br>
-                        2. <strong>Schriftliche Prüfung:</strong> Schätze dein Ergebnis<br>
-                        3. <strong>Überprüfung:</strong> Kontrolliere deine Eingaben<br><br>
-                        Dann berechnet er mit der Gewichtung deine voraussichtliche Endnote.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        Was ist der Unterschied zu vorher?
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <strong>Neu:</strong> Du gibst jetzt zuerst deine bekannten Noten ein (Jahresleistung und praktische Prüfung). Danach schätzt du nur noch die schriftliche Prüfung. Das ist viel schneller und genauer!<br><br>
-                        <strong>Früher:</strong> Du musstest alle Noten schätzen.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        Was bedeutet "Schätzung"?
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Du kennst die Ergebnisse deiner Prüfungen noch nicht! Das Tool soll dir helfen, eine <strong>Vermutung</strong> aufzustellen, wie gut/schlecht du wahrscheinlich abschneidest.<br><br>
-                        Es ist nicht exakt - es ist eine Hilfe für deine Planung!
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        Welche Fächer haben eine Kommunikationsprüfung?
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Meistens:<br>
-                        • <strong>Fremdsprachen</strong> (Englisch, Französisch, Spanisch, etc.)<br>
-                        • <strong>Deutsch</strong> (in vielen Bundesländern)<br>
-                        • <strong>Naturwissenschaften</strong> (manchmal praktische Teile)<br><br>
-                        Frag einfach deinen Lehrer, ob es eine gibt!
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        Kann ich die Gewichtung ändern?
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <strong>Ja!</strong> Gehe zum Reiter "Gewichtung" und ändere die Prozentsätze nach deinen Vorgaben. Manche Schulen/Bundesländer haben andere Gewichtungen. Du kannst alles anpassen!
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        Wie kann ich meine Note verbessern?
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <strong>Strategie:</strong><br>
-                        • Die <strong>Jahresleistung</strong> ist bereits bekannt - konzentriere dich auf die Prüfungen!<br>
-                        • Die <strong>schriftliche Prüfung</strong> zählt viel - intensives Lernen zahlt sich aus!<br>
-                        • Die <strong>Kommunikation</strong> auch - Übe Sprachpraxis!<br><br>
-                        Nutze den Rechner, um zu sehen, wo du noch zulegen kannst!
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        Wie genau ist die Berechnung?
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Der Rechner ist so genau wie deine Eingaben! Die Formel ist einfach:<br><br>
-                        <strong>Endnote = (J × Gewicht-J) + (S × Gewicht-S) + (K × Gewicht-K)</strong><br><br>
-                        Aber Achtung: Das ist immer noch eine Schätzung basierend auf deinen Vermutungen. Die echte Note wird sich wahrscheinlich um 0,3 bis 0,5 unterscheiden.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        Kann ich meine Werte speichern?
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Der Rechner speichert deine Gewichtung automatisch im Browser. Wenn du die Seite neu öffnest, sind deine Einstellungen noch da. Die Noten werden zurückgesetzt, damit du neu berechnen kannst.
-                    </div>
                 </div>
             </div>
         </div>
@@ -890,75 +488,25 @@
         let currentStep = 1;
         let hasPractical = null;
 
-        // Laden gespeicherte Gewichte
-        window.addEventListener('load', () => {
-            const savedWeights = localStorage.getItem('notenschnittWeights');
-            if (savedWeights) {
-                const weights = JSON.parse(savedWeights);
-                document.getElementById('weightJahresleistung').value = weights.jahresleistung || 50;
-                document.getElementById('weightSchriftlich').value = weights.schriftlich || 30;
-                document.getElementById('weightPraktisch').value = weights.praktisch || 20;
-                updateWeightDisplay();
-            }
-        });
-
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+        function validateStep1() {
+            const jahr = document.getElementById('jahresleistung').value;
+            document.getElementById('step1Btn').disabled = !jahr;
         }
 
-        function updateWeightDisplay() {
-            const j = parseFloat(document.getElementById('weightJahresleistung').value) || 0;
-            const s = parseFloat(document.getElementById('weightSchriftlich').value) || 0;
-            const p = parseFloat(document.getElementById('weightPraktisch').value) || 0;
-            const total = j + s + p;
-
-            document.getElementById('displayJahresleistung').textContent = j + '%';
-            document.getElementById('displaySchriftlich').textContent = s + '%';
-            document.getElementById('displayPraktisch').textContent = p + '%';
-            document.getElementById('totalWeight').textContent = total;
-
-            if (total !== 100) {
-                document.getElementById('weightWarning').classList.remove('hidden');
-                document.getElementById('weightWarningValue').textContent = total;
-            } else {
-                document.getElementById('weightWarning').classList.add('hidden');
-            }
+        function validateStep3() {
+            const praktisch = document.getElementById('praktisch').value;
+            document.getElementById('step3Btn').disabled = !praktisch;
         }
 
-        function resetWeights() {
-            document.getElementById('weightJahresleistung').value = 50;
-            document.getElementById('weightSchriftlich').value = 30;
-            document.getElementById('weightPraktisch').value = 20;
-            updateWeightDisplay();
+        function validateStep4() {
+            const schrift = document.getElementById('schriftlich').value;
+            document.getElementById('step4Btn').disabled = !schrift;
         }
 
-        function saveWeights() {
-            const j = parseFloat(document.getElementById('weightJahresleistung').value) || 0;
-            const s = parseFloat(document.getElementById('weightSchriftlich').value) || 0;
-            const p = parseFloat(document.getElementById('weightPraktisch').value) || 0;
-            const total = j + s + p;
-
-            if (total !== 100) {
-                alert('Die Summe muss 100% sein! Aktuell: ' + total + '%');
-                return;
-            }
-
-            localStorage.setItem('notenschnittWeights', JSON.stringify({
-                jahresleistung: j,
-                schriftlich: s,
-                praktisch: p
-            }));
-
-            alert('✅ Gewichtung gespeichert!');
-            switchTab('wizard');
-        }
-
-        function selectOption(name, value, element) {
+        function selectPractical(value, element) {
             hasPractical = value;
+            
+            // Remove selected from all buttons
             document.querySelectorAll('.option-button').forEach(btn => {
                 if (btn.parentElement === element.parentElement) {
                     btn.classList.remove('selected');
@@ -966,87 +514,64 @@
             });
             element.classList.add('selected');
             
-            if (value) {
-                document.getElementById('praktischInputForm').classList.remove('hidden');
-            } else {
-                document.getElementById('praktischInputForm').classList.add('hidden');
-                document.getElementById('praktisch').value = '';
-            }
-            
-            updateProgress();
-        }
-
-        function updateProgress() {
-            const jahr = document.getElementById('jahresleistung').value;
-            const schrift = document.getElementById('schriftlich').value;
-            const praktisch = document.getElementById('praktisch').value;
-
-            // Step 1: Jahresleistung + hasPractical selected
-            const step1Valid = jahr && hasPractical !== null && (hasPractical === false || praktisch);
-            document.getElementById('step1Btn').disabled = !step1Valid;
-
-            // Step 2: Schriftlich filled
-            document.getElementById('step2Btn').disabled = !schrift;
-
-            const progress = (currentStep / 3) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('step2Btn').disabled = false;
         }
 
         function goToStep(step) {
             // Validate before moving
-            if (step === 2) {
-                const jahr = document.getElementById('jahresleistung').value;
-                const praktisch = document.getElementById('praktisch').value;
-                if (!jahr || hasPractical === null || (hasPractical === true && !praktisch)) {
-                    alert('Bitte fülle alle Felder aus!');
-                    return;
-                }
+            if (step === 2 && !document.getElementById('jahresleistung').value) {
+                alert('Bitte gib deine Jahresleistung ein!');
+                return;
             }
 
-            if (step === 3) {
-                const schrift = document.getElementById('schriftlich').value;
-                if (!schrift) {
-                    alert('Bitte fülle alle Felder aus!');
-                    return;
-                }
-                // Update review
-                document.getElementById('review-jahresleistung').textContent = document.getElementById('jahresleistung').value;
-                document.getElementById('review-schriftlich').textContent = document.getElementById('schriftlich').value;
-                if (hasPractical) {
-                    document.getElementById('review-praktisch-item').classList.remove('hidden');
-                    document.getElementById('review-praktisch').textContent = document.getElementById('praktisch').value;
-                } else {
-                    document.getElementById('review-praktisch-item').classList.add('hidden');
-                }
+            if (step === 3 && hasPractical === null) {
+                alert('Bitte wähle eine Option!');
+                return;
             }
 
+            if (step === 3 && hasPractical === false) {
+                // Skip to step 4
+                goToStep(4);
+                return;
+            }
+
+            if (step === 4 && !document.getElementById('praktisch').value && hasPractical === true) {
+                alert('Bitte gib deine Praxisnote ein!');
+                return;
+            }
+
+            // Show the step
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById('step' + step).classList.add('active');
             currentStep = step;
-            updateProgress();
+
             window.scrollTo(0, 0);
+        }
+
+        function goBack() {
+            if (hasPractical === false) {
+                goToStep(2);
+            } else {
+                goToStep(3);
+            }
         }
 
         function calculateAndShowResult() {
             const jahresleistung = parseFloat(document.getElementById('jahresleistung').value);
             const schriftlich = parseFloat(document.getElementById('schriftlich').value);
-
-            const weights = JSON.parse(localStorage.getItem('notenschnittWeights')) || {
-                jahresleistung: 50,
-                schriftlich: 30,
-                praktisch: 20
-            };
-
-            let finalGrade;
+            
             let praktisch = null;
-
             if (hasPractical) {
                 praktisch = parseFloat(document.getElementById('praktisch').value);
-                const totalWeight = weights.jahresleistung + weights.schriftlich + weights.praktisch;
-                finalGrade = (jahresleistung * weights.jahresleistung + schriftlich * weights.schriftlich + praktisch * weights.praktisch) / totalWeight;
+            }
+
+            let finalGrade;
+
+            // Simple average for now
+            if (hasPractical && praktisch !== null) {
+                finalGrade = (jahresleistung + schriftlich + praktisch) / 3;
             } else {
-                const totalWeight = weights.jahresleistung + weights.schriftlich;
-                finalGrade = (jahresleistung * weights.jahresleistung + schriftlich * weights.schriftlich) / totalWeight;
+                finalGrade = (jahresleistung + schriftlich) / 2;
             }
 
             finalGrade = Math.round(finalGrade * 10) / 10;
@@ -1056,7 +581,7 @@
             document.getElementById('jahresleistungResult').textContent = jahresleistung.toFixed(1);
             document.getElementById('schriftlichResult').textContent = schriftlich.toFixed(1);
 
-            if (hasPractical) {
+            if (hasPractical && praktisch !== null) {
                 document.getElementById('praktischResult').classList.remove('hidden');
                 document.getElementById('praktischValue').textContent = praktisch.toFixed(1);
             } else {
@@ -1067,32 +592,26 @@
             const gradeClass = 'grade-' + Math.ceil(finalGrade);
             document.getElementById('gradeBadge').innerHTML = `<span class="grade-badge ${gradeClass}">Note: ${finalGrade.toFixed(1)}</span>`;
 
-            // Weight info
-            const weightText = hasPractical ? 
-                `${weights.jahresleistung}% + ${weights.schriftlich}% + ${weights.praktisch}%` :
-                `${weights.jahresleistung}% + ${weights.schriftlich}%`;
-            document.getElementById('weightInfo').textContent = weightText;
-
             // Advice
             let advice = '';
             if (finalGrade <= 1.5) {
-                advice = '🌟 <strong>Ausgezeichnet!</strong> Du machst das wirklich sehr gut. Gratuliere dir selbst!';
+                advice = '🌟 <strong>Ausgezeichnet!</strong> Du machst das wirklich sehr gut!';
             } else if (finalGrade <= 2.5) {
-                advice = '😊 <strong>Sehr gut gemacht!</strong> Du bist auf einem guten Weg. Konzentriere dich in der schriftlichen Prüfung!';
+                advice = '😊 <strong>Sehr gut!</strong> Du bist auf einem guten Weg. Viel Erfolg in der Prüfung!';
             } else if (finalGrade <= 3.5) {
-                advice = '👍 <strong>Gut!</strong> Du hast eine faire Chance. Mit noch mehr Lernen kannst du dich verbessern!';
+                advice = '👍 <strong>Gut!</strong> Du hast eine faire Chance. Konzentriere dich auf die schriftliche Prüfung!';
             } else if (finalGrade <= 4.5) {
-                advice = '⚠️ <strong>Es wird knapp!</strong> Du solltest intensiv für die schriftliche Prüfung lernen, um deine Note zu verbessern!';
+                advice = '⚠️ <strong>Es wird knapp!</strong> Lern nochmal richtig für die schriftliche Prüfung - du packst das!';
             } else {
-                advice = '🚨 <strong>Aufgepasst!</strong> Es ist kritisch. Konzentriere dich mit voller Kraft auf die Prüfung. Du packst das!';
+                advice = '🚨 <strong>Aufgepasst!</strong> Es ist kritisch. Volles Programm beim Lernen! Du schaffst es!';
             }
 
-            document.getElementById('adviceContent').innerHTML = `<div class="info-box">${advice}</div>`;
+            document.getElementById('adviceContent').innerHTML = advice;
 
             // Hide steps, show results
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById('resultSection').classList.remove('hidden');
-            updateProgress();
+
             window.scrollTo(0, 0);
         }
 
@@ -1104,20 +623,12 @@
             currentStep = 1;
 
             document.querySelectorAll('.option-button').forEach(btn => btn.classList.remove('selected'));
-            document.getElementById('praktischInputForm').classList.add('hidden');
             document.getElementById('resultSection').classList.add('hidden');
 
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById('step1').classList.add('active');
 
-            updateProgress();
             window.scrollTo(0, 0);
-        }
-
-        function toggleFAQ(element) {
-            const item = element.parentElement;
-            item.classList.toggle('active');
-            item.querySelector('.faq-answer').classList.toggle('active');
         }
     </script>
 </body>
