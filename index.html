@@ -1,1 +1,846 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notenschnitt-Rechner | Schüler Prüfungshilfe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 10px 13px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 1rem;
+            color: var(--text-primary);
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+            padding: 1rem 0;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .label-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .label-weight {
+            background: var(--light-bg);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input[type="number"]:focus,
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .input-with-unit {
+            position: relative;
+        }
+
+        .input-unit {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+        .input-with-unit input {
+            padding-right: 3rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--primary-color);
+        }
+
+        .checkbox-label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: var(--light-bg);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #f0f9ff, #f8fafc);
+            border: 2px solid var(--primary-light);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .grade-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .grade-1 { background: #dcfce7; color: #166534; }
+        .grade-2 { background: #dbeafe; color: #0c4a6e; }
+        .grade-3 { background: #fef3c7; color: #78350f; }
+        .grade-4 { background: #fed7aa; color: #7c2d12; }
+        .grade-5 { background: #fecaca; color: #7f1d1d; }
+        .grade-6 { background: #f8bfbf; color: #600; }
+
+        .breakdown {
+            background: var(--light-bg);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breakdown-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .breakdown-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .breakdown-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .info-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .info-box strong {
+            color: var(--text-primary);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--light-bg);
+            padding: 0.5rem;
+            border-radius: 10px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .warning-badge {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            border-left: 4px solid var(--warning-color);
+        }
+
+        .success-badge {
+            background: #dcfce7;
+            color: #166534;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            border-left: 4px solid var(--success-color);
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            background: var(--light-bg);
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        .faq-answer {
+            background: white;
+            padding: 1rem;
+            border-radius: 0 0 10px 10px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        .chevron {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .chevron {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .card {
+                padding: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            .result-value {
+                font-size: 2rem;
+            }
+
+            button {
+                padding: 0.875rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Notenschnitt-Rechner</h1>
+            <p>Berechne deinen erwarteten Notendurchschnitt</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('calculator')">Rechner</button>
+            <button class="tab-btn" onclick="switchTab('faq')">Hilfe & FAQ</button>
+        </div>
+
+        <!-- CALCULATOR TAB -->
+        <div id="calculator" class="tab-content active">
+            <div class="info-box">
+                ℹ️ <strong>Gewichtung:</strong> Jahresleistung 50% + Schriftliche Prüfung 30% + Kommunikationsprüfung 20%
+            </div>
+
+            <div class="card">
+                <div class="card-title">📊 Noten eingeben</div>
+
+                <div class="form-group">
+                    <label class="label-info">
+                        <span>Jahresleistung</span>
+                        <span class="label-weight">50%</span>
+                    </label>
+                    <div class="input-with-unit">
+                        <input 
+                            type="number" 
+                            id="jahresleistung" 
+                            placeholder="z.B. 2,5" 
+                            min="1" 
+                            max="6" 
+                            step="0.1"
+                            oninput="calculateGrade()"
+                        >
+                        <span class="input-unit">📌</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="label-info">
+                        <span>Schriftliche Prüfung</span>
+                        <span class="label-weight">30%</span>
+                    </label>
+                    <div class="input-with-unit">
+                        <input 
+                            type="number" 
+                            id="schriftlich" 
+                            placeholder="z.B. 3,0" 
+                            min="1" 
+                            max="6" 
+                            step="0.1"
+                            oninput="calculateGrade()"
+                        >
+                        <span class="input-unit">✏️</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input 
+                            type="checkbox" 
+                            id="hasKommunikation" 
+                            onchange="toggleKommunikation()"
+                        >
+                        <label class="checkbox-label" for="hasKommunikation">
+                            Kommunikationsprüfung vorhanden (20%)
+                        </label>
+                    </div>
+                </div>
+
+                <div id="kommunikationGroup" class="form-group hidden">
+                    <label class="label-info">
+                        <span>Kommunikationsprüfung</span>
+                        <span class="label-weight">20%</span>
+                    </label>
+                    <div class="input-with-unit">
+                        <input 
+                            type="number" 
+                            id="kommunikation" 
+                            placeholder="z.B. 2,0" 
+                            min="1" 
+                            max="6" 
+                            step="0.1"
+                            oninput="calculateGrade()"
+                        >
+                        <span class="input-unit">🎤</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESULT SECTION -->
+            <div id="resultSection" class="hidden">
+                <div class="result-card">
+                    <div class="result-label">Dein voraussichtlicher Notendurchschnitt</div>
+                    <div class="result-value" id="finalGrade">-</div>
+                    <div id="gradeBadge"></div>
+                    <div class="breakdown">
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">📌 Jahresleistung (50%)</span>
+                            <span class="breakdown-value" id="jahresleistungResult">-</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">✏️ Schriftlich (30%)</span>
+                            <span class="breakdown-value" id="schriftlichResult">-</span>
+                        </div>
+                        <div id="kommunikationResult" class="breakdown-item hidden">
+                            <span class="breakdown-label">🎤 Kommunikation (20%)</span>
+                            <span class="breakdown-value" id="kommunikationValue">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="adviceCard" class="card">
+                    <div class="card-title">💡 Tipps & Analysen</div>
+                    <div id="adviceContent"></div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-secondary" onclick="resetForm()">🔄 Zurücksetzen</button>
+            </div>
+        </div>
+
+        <!-- FAQ TAB -->
+        <div id="faq" class="tab-content">
+            <div class="card">
+                <div class="card-title">❓ Häufig gestellte Fragen</div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Wie wird die Note berechnet?
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Die Gesamtnote wird wie folgt berechnet:<br><br>
+                        <strong>Gesamtnote = (Jahresleistung × 0,5) + (Schriftliche × 0,3) + (Kommunikation × 0,2)*</strong><br><br>
+                        *Die Kommunikationsprüfung ist optional und wird nur berücksichtigt, wenn du sie hast.<br><br>
+                        Beispiel: Jahresleistung 2,5 + Schriftlich 3,0 + Kommunikation 2,0 = (2,5×0,5) + (3,0×0,3) + (2,0×0,2) = 1,25 + 0,9 + 0,4 = <strong>2,55</strong>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Was ist die Jahresleistung?
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Die Jahresleistung ist deine durchschnittliche Note während des Schuljahres. Sie wird aus deinen Klassenarbeiten, Tests, Mitarbeit und sonstigen Leistungen berechnet. Sie ist mit 50% die wichtigste Komponente für deine Gesamtnote.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Welche Fächer haben eine Kommunikationsprüfung?
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Die Kommunikationsprüfung (auch mündliche Prüfung) gibt es vor allem in:<br>
+                        • <strong>Fremdsprachen</strong> (Englisch, Französisch, Spanisch, etc.)<br>
+                        • <strong>Deutsch</strong> (je nach Bundesland)<br>
+                        • Einige weitere Fächer je nach Schulart<br><br>
+                        Ob dein Fach eine Kommunikationsprüfung hat, erfragst du am besten bei deinem Lehrer oder schaust in deinen Schulunterlagen.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Wie genau ist dieser Rechner?
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Dieser Rechner ist eine <strong>Schätzung</strong> basierend auf den deutschen Bewertungsrichtlinien. Die tatsächliche Enddnote kann je nach Bundesland und Schulart leicht abweichen. Er gibt dir aber einen sehr guten Überblick über deine voraussichtliche Note!
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Kann ich Dezimalzahlen eingeben?
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Ja! Du kannst Noten wie 2,5 oder 3,7 eingeben. Der Rechner arbeitet mit Dezimalzahlen und rundet die Enddnote auf eine Dezimalstelle.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Was bedeuten die Farben?
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Die Farben zeigen die Notenqualität an:<br>
+                        • <span class="grade-badge grade-1">1 - Sehr gut</span><br>
+                        • <span class="grade-badge grade-2">2 - Gut</span><br>
+                        • <span class="grade-badge grade-3">3 - Befriedigend</span><br>
+                        • <span class="grade-badge grade-4">4 - Ausreichend</span><br>
+                        • <span class="grade-badge grade-5">5 - Mangelhaft</span><br>
+                        • <span class="grade-badge grade-6">6 - Ungenügend</span>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Wie kann ich meine Note noch verbessern?
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <strong>Tipps zur Notenverbesserung:</strong><br>
+                        • <strong>Jahresleistung:</strong> Die Jahresleistung ist am wichtigsten (50%)! Konzentriere dich auf gute Mitarbeit und Übungsaufgaben.<br>
+                        • <strong>Schriftliche Prüfung:</strong> Lerne systematisch und mache Übungsaufgaben. Diese zählt 30%.<br>
+                        • <strong>Kommunikationsprüfung:</strong> Übe Sprachpraxis und Aussprache. Diese zählt 20%.<br>
+                        • Nutze Lerngruppen und Nachhilfe wenn nötig<br>
+                        • Frage deinen Lehrer nach Tipps und Unterstützung
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleKommunikation() {
+            const checkbox = document.getElementById('hasKommunikation');
+            const kommunikationGroup = document.getElementById('kommunikationGroup');
+            
+            if (checkbox.checked) {
+                kommunikationGroup.classList.remove('hidden');
+            } else {
+                kommunikationGroup.classList.add('hidden');
+                document.getElementById('kommunikation').value = '';
+            }
+            calculateGrade();
+        }
+
+        function calculateGrade() {
+            const jahresleistung = parseFloat(document.getElementById('jahresleistung').value) || 0;
+            const schriftlich = parseFloat(document.getElementById('schriftlich').value) || 0;
+            const hasKommunikation = document.getElementById('hasKommunikation').checked;
+            const kommunikation = parseFloat(document.getElementById('kommunikation').value) || 0;
+
+            // Validation
+            if (jahresleistung === 0 || schriftlich === 0) {
+                document.getElementById('resultSection').classList.add('hidden');
+                return;
+            }
+
+            if (hasKommunikation && kommunikation === 0) {
+                document.getElementById('resultSection').classList.add('hidden');
+                return;
+            }
+
+            let finalGrade;
+            
+            if (hasKommunikation) {
+                finalGrade = (jahresleistung * 0.5) + (schriftlich * 0.3) + (kommunikation * 0.2);
+            } else {
+                // Recalculate without Kommunikation, redistribute weights
+                finalGrade = (jahresleistung * 0.5) + (schriftlich * 0.5);
+            }
+
+            // Round to one decimal place
+            finalGrade = Math.round(finalGrade * 10) / 10;
+
+            // Update results
+            document.getElementById('finalGrade').textContent = finalGrade;
+            document.getElementById('jahresleistungResult').textContent = jahresleistung;
+            document.getElementById('schriftlichResult').textContent = schriftlich;
+
+            if (hasKommunikation) {
+                document.getElementById('kommunikationResult').classList.remove('hidden');
+                document.getElementById('kommunikationValue').textContent = kommunikation;
+            } else {
+                document.getElementById('kommunikationResult').classList.add('hidden');
+            }
+
+            // Update badge
+            updateGradeBadge(finalGrade);
+
+            // Generate advice
+            generateAdvice(jahresleistung, schriftlich, kommunikation, hasKommunikation, finalGrade);
+
+            document.getElementById('resultSection').classList.remove('hidden');
+        }
+
+        function updateGradeBadge(grade) {
+            const badge = document.getElementById('gradeBadge');
+            let badgeClass = '';
+            let badgeText = '';
+
+            if (grade <= 1.5) {
+                badgeClass = 'grade-1';
+                badgeText = '🌟 Sehr Gut! Ausgezeichnet!';
+            } else if (grade <= 2.5) {
+                badgeClass = 'grade-2';
+                badgeText = '✅ Gut! Sehr solide!';
+            } else if (grade <= 3.5) {
+                badgeClass = 'grade-3';
+                badgeText = '👍 Befriedigend. Standard.';
+            } else if (grade <= 4.5) {
+                badgeClass = 'grade-4';
+                badgeText = '⚠️ Ausreichend. Noch OK!';
+            } else if (grade <= 5.5) {
+                badgeClass = 'grade-5';
+                badgeText = '❌ Mangelhaft. Vorsicht!';
+            } else {
+                badgeClass = 'grade-6';
+                badgeText = '🚨 Ungenügend. Hilfe nötig!';
+            }
+
+            badge.innerHTML = `<span class="grade-badge ${badgeClass}">${badgeText}</span>`;
+        }
+
+        function generateAdvice(jahresleistung, schriftlich, kommunikation, hasKommunikation, finalGrade) {
+            const adviceContent = document.getElementById('adviceContent');
+            let advice = '';
+
+            // Determine which area needs improvement
+            if (finalGrade <= 2.0) {
+                advice += '<div class="success-badge">🎉 Du machst dir selbst Gedanken über deine Note - das ist sehr positiv! Mit dieser Quote bist du auf sehr gutem Weg!</div>';
+            } else if (finalGrade <= 3.0) {
+                advice += '<div class="success-badge">✅ Deine Quote ist solide! Du brauchst aber noch ein wenig Fokus.</div>';
+            } else if (finalGrade <= 4.0) {
+                advice += '<div class="warning-badge">⚠️ Die Note ist noch ausreichend, aber es könnte knapp werden. Konzentriere dich auf die Schwachstellen!</div>';
+            } else {
+                advice += '<div class="warning-badge">🚨 Die Note könnte kritisch werden. Du solltest schnell handeln und dich intensiv vorbereiten!</div>';
+            }
+
+            // Identify weak areas
+            const values = [jahresleistung, schriftlich];
+            if (hasKommunikation) values.push(kommunikation);
+
+            const weakest = Math.max(...values);
+            const strongest = Math.min(...values);
+
+            advice += '<br><br><strong>Analyse deiner Leistungen:</strong><br>';
+
+            if (jahresleistung >= 4.0) {
+                advice += '📌 <strong>Jahresleistung:</strong> Das ist deine Schwachstelle (50% Gewicht!). Konzentriere dich auf bessere Mitarbeit und Aufgaben!<br>';
+            } else if (jahresleistung >= 3.0) {
+                advice += '📌 <strong>Jahresleistung:</strong> Ganz okay, könnte aber besser sein.<br>';
+            } else {
+                advice += '📌 <strong>Jahresleistung:</strong> Sehr gut! Das ist eine solide Basis.<br>';
+            }
+
+            if (schriftlich >= 4.0) {
+                advice += '✏️ <strong>Schriftliche Prüfung:</strong> Du solltest hier deutlich mehr lernen. Das zählt 30%!<br>';
+            } else if (schriftlich >= 3.0) {
+                advice += '✏️ <strong>Schriftliche Prüfung:</strong> Ganz solide, aber Lernzeit ist wertvoll.<br>';
+            } else {
+                advice += '✏️ <strong>Schriftliche Prüfung:</strong> Sehr gute Vorbereitung bisher!<br>';
+            }
+
+            if (hasKommunikation) {
+                if (kommunikation >= 4.0) {
+                    advice += '🎤 <strong>Kommunikation:</strong> Übe deine Sprachfähigkeiten. Das zählt 20%!<br>';
+                } else if (kommunikation >= 3.0) {
+                    advice += '🎤 <strong>Kommunikation:</strong> Guter Fortschritt, weiter so!<br>';
+                } else {
+                    advice += '🎤 <strong>Kommunikation:</strong> Ausgezeichnet! Deine Sprachpraxis zahlt sich aus!<br>';
+                }
+            }
+
+            adviceContent.innerHTML = advice;
+        }
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active to clicked button
+            event.target.classList.add('active');
+        }
+
+        function resetForm() {
+            document.getElementById('jahresleistung').value = '';
+            document.getElementById('schriftlich').value = '';
+            document.getElementById('kommunikation').value = '';
+            document.getElementById('hasKommunikation').checked = false;
+            document.getElementById('kommunikationGroup').classList.add('hidden');
+            document.getElementById('resultSection').classList.add('hidden');
+        }
+
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+
+            // Close all other FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-answer').classList.remove('active');
+                }
+            });
+
+            // Toggle current FAQ
+            faqItem.classList.toggle('active');
+            answer.classList.toggle('active');
+        }
+
+        // Prevent form submission on enter
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && e.target.tagName === 'INPUT') {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
