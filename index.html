@@ -36,7 +36,7 @@
         }
 
         .container {
-            max-width: 500px;
+            max-width: 550px;
             margin: 0 auto;
         }
 
@@ -58,66 +58,77 @@
             opacity: 0.95;
         }
 
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.3);
+            height: 6px;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: white;
+            height: 100%;
+            transition: width 0.4s ease;
+            border-radius: 10px;
+        }
+
         .card {
             background: var(--card-bg);
             border-radius: 16px;
-            padding: 1.5rem;
+            padding: 2rem;
             margin-bottom: 1.5rem;
             box-shadow: var(--shadow);
         }
 
         .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
-        .card-title::before {
-            content: '';
-            width: 4px;
-            height: 24px;
-            background: var(--primary-color);
-            border-radius: 2px;
+        .step-indicator {
+            background: var(--light-bg);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: inline-block;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.75rem;
         }
 
         label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-        }
-
-        .label-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .label-weight {
-            background: var(--light-bg);
-            color: var(--primary-color);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            margin-bottom: 0.75rem;
             font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .label-hint {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-top: 0.25rem;
         }
 
         input[type="number"],
         input[type="text"],
         select {
             width: 100%;
-            padding: 0.875rem;
+            padding: 1rem;
             border: 2px solid var(--border-color);
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1rem;
             transition: all 0.3s ease;
             font-family: inherit;
@@ -142,43 +153,25 @@
             transform: translateY(-50%);
             color: var(--text-secondary);
             font-weight: 600;
+            font-size: 1.2rem;
             pointer-events: none;
         }
 
         .input-with-unit input {
-            padding-right: 3rem;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            accent-color: var(--primary-color);
-        }
-
-        .checkbox-label {
-            margin: 0;
-            cursor: pointer;
-            font-weight: 400;
+            padding-right: 3.5rem;
         }
 
         .button-group {
             display: flex;
             gap: 1rem;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
         }
 
         button {
             flex: 1;
-            padding: 1rem;
+            padding: 1.1rem;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -193,13 +186,14 @@
             box-shadow: var(--shadow);
         }
 
-        .btn-primary:hover {
+        .btn-primary:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
 
-        .btn-primary:active {
-            transform: translateY(0);
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         .btn-secondary {
@@ -213,96 +207,47 @@
             color: white;
         }
 
-        .result-card {
-            background: linear-gradient(135deg, #f0f9ff, #f8fafc);
-            border: 2px solid var(--primary-light);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .result-label {
+        .btn-tertiary {
+            background: transparent;
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            border: 2px solid var(--border-color);
         }
 
-        .result-value {
-            font-size: 2.5rem;
-            font-weight: 700;
+        .btn-tertiary:hover {
+            border-color: var(--primary-color);
             color: var(--primary-color);
-            margin-bottom: 0.5rem;
         }
 
-        .result-description {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .grade-badge {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            margin-top: 1rem;
-        }
-
-        .grade-1 { background: #dcfce7; color: #166534; }
-        .grade-2 { background: #dbeafe; color: #0c4a6e; }
-        .grade-3 { background: #fef3c7; color: #78350f; }
-        .grade-4 { background: #fed7aa; color: #7c2d12; }
-        .grade-5 { background: #fecaca; color: #7f1d1d; }
-        .grade-6 { background: #f8bfbf; color: #600; }
-
-        .breakdown {
-            background: var(--light-bg);
-            border-radius: 12px;
-            padding: 1rem;
-            margin-top: 1rem;
-        }
-
-        .breakdown-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .option-button {
+            width: 100%;
+            padding: 1.25rem;
             margin-bottom: 0.75rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--border-color);
+            border: 2px solid var(--border-color);
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .breakdown-item:last-child {
-            margin-bottom: 0;
-            border-bottom: none;
+        .option-button:hover {
+            border-color: var(--primary-color);
+            background: var(--light-bg);
         }
 
-        .breakdown-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .breakdown-value {
+        .option-button.selected {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(99, 102, 241, 0.05));
             font-weight: 600;
-            color: var(--text-primary);
         }
 
-        .info-box {
-            background: #f0f9ff;
-            border-left: 4px solid var(--primary-color);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .info-box strong {
-            color: var(--text-primary);
-        }
-
-        .hidden {
-            display: none !important;
+        .option-icon {
+            font-size: 1.5rem;
         }
 
         .tabs {
@@ -340,24 +285,135 @@
             display: block;
         }
 
-        .warning-badge {
-            background: #fef3c7;
-            color: #92400e;
-            padding: 0.75rem;
-            border-radius: 8px;
+        .result-card {
+            background: linear-gradient(135deg, #f0f9ff, #f8fafc);
+            border: 2px solid var(--primary-light);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .result-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .grade-badge {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.95rem;
             margin-top: 1rem;
-            font-size: 0.9rem;
-            border-left: 4px solid var(--warning-color);
+        }
+
+        .grade-1 { background: #dcfce7; color: #166534; }
+        .grade-2 { background: #dbeafe; color: #0c4a6e; }
+        .grade-3 { background: #fef3c7; color: #78350f; }
+        .grade-4 { background: #fed7aa; color: #7c2d12; }
+        .grade-5 { background: #fecaca; color: #7f1d1d; }
+        .grade-6 { background: #f8bfbf; color: #600; }
+
+        .breakdown {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breakdown-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .breakdown-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .breakdown-value {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .info-box strong {
+            color: var(--text-primary);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
         }
 
         .success-badge {
             background: #dcfce7;
             color: #166534;
-            padding: 0.75rem;
-            border-radius: 8px;
+            padding: 1rem;
+            border-radius: 12px;
             margin-top: 1rem;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             border-left: 4px solid var(--success-color);
+            line-height: 1.6;
+        }
+
+        .warning-badge {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            border-left: 4px solid var(--warning-color);
+            line-height: 1.6;
+        }
+
+        .danger-badge {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            border-left: 4px solid var(--danger-color);
+            line-height: 1.6;
         }
 
         .faq-item {
@@ -366,7 +422,7 @@
 
         .faq-question {
             background: var(--light-bg);
-            padding: 1rem;
+            padding: 1.25rem;
             border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
@@ -384,11 +440,11 @@
 
         .faq-answer {
             background: white;
-            padding: 1rem;
+            padding: 1.25rem;
             border-radius: 0 0 10px 10px;
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.6;
+            font-size: 0.95rem;
+            line-height: 1.7;
             display: none;
         }
 
@@ -404,23 +460,64 @@
             transform: rotate(180deg);
         }
 
+        .settings-section {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .settings-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .weight-input-group {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+
+        .weight-input {
+            flex: 1;
+        }
+
+        .weight-input input {
+            padding: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .weight-display {
+            background: var(--card-bg);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+            white-space: nowrap;
+        }
+
         @media (max-width: 600px) {
             header h1 {
                 font-size: 1.5rem;
             }
 
             .card {
-                padding: 1.25rem;
+                padding: 1.5rem;
                 margin-bottom: 1rem;
             }
 
             .result-value {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
             button {
-                padding: 0.875rem;
+                padding: 0.95rem;
                 font-size: 0.9rem;
+            }
+
+            .button-group {
+                flex-direction: column;
             }
         }
     </style>
@@ -429,95 +526,146 @@
     <div class="container">
         <header>
             <h1>📚 Notenschnitt-Rechner</h1>
-            <p>Berechne deinen erwarteten Notendurchschnitt</p>
+            <p>Dein persönliches Prüfungs-Tool</p>
         </header>
 
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('calculator')">Rechner</button>
-            <button class="tab-btn" onclick="switchTab('faq')">Hilfe & FAQ</button>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
         </div>
 
-        <!-- CALCULATOR TAB -->
-        <div id="calculator" class="tab-content active">
-            <div class="info-box">
-                ℹ️ <strong>Gewichtung:</strong> Jahresleistung 50% + Schriftliche Prüfung 30% + Kommunikationsprüfung 20%
-            </div>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('wizard')">📝 Rechner</button>
+            <button class="tab-btn" onclick="switchTab('settings')">⚙️ Gewichtung</button>
+            <button class="tab-btn" onclick="switchTab('faq')">❓ Hilfe</button>
+        </div>
 
-            <div class="card">
-                <div class="card-title">📊 Noten eingeben</div>
-
-                <div class="form-group">
-                    <label class="label-info">
-                        <span>Jahresleistung</span>
-                        <span class="label-weight">50%</span>
-                    </label>
-                    <div class="input-with-unit">
-                        <input 
-                            type="number" 
-                            id="jahresleistung" 
-                            placeholder="z.B. 2,5" 
-                            min="1" 
-                            max="6" 
-                            step="0.1"
-                            oninput="calculateGrade()"
-                        >
-                        <span class="input-unit">📌</span>
+        <!-- WIZARD TAB -->
+        <div id="wizard" class="tab-content active">
+            
+            <!-- STEP 1 -->
+            <div id="step1" class="step active">
+                <div class="card">
+                    <div class="step-indicator">Schritt 1 von 4</div>
+                    <div class="card-title">📌 Jahresleistung</div>
+                    <div class="info-box">
+                        Die Jahresleistung ist dein Durchschnitt aus dem ganzen Schuljahr. Sie zählt am meisten (Standard: 50%).
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="label-info">
-                        <span>Schriftliche Prüfung</span>
-                        <span class="label-weight">30%</span>
-                    </label>
-                    <div class="input-with-unit">
-                        <input 
-                            type="number" 
-                            id="schriftlich" 
-                            placeholder="z.B. 3,0" 
-                            min="1" 
-                            max="6" 
-                            step="0.1"
-                            oninput="calculateGrade()"
-                        >
-                        <span class="input-unit">✏️</span>
+                    <div class="form-group">
+                        <label>Welche Note hast du im Durchschnitt während des Jahres gehabt?</label>
+                        <span class="label-hint">Deine Klassenarbeiten, Tests, Mitarbeit, etc.</span>
+                        <div class="input-with-unit">
+                            <input 
+                                type="number" 
+                                id="jahresleistung" 
+                                placeholder="z.B. 2,5" 
+                                min="1" 
+                                max="6" 
+                                step="0.1"
+                                oninput="updateProgress()"
+                            >
+                            <span class="input-unit">📝</span>
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="checkbox-group">
-                        <input 
-                            type="checkbox" 
-                            id="hasKommunikation" 
-                            onchange="toggleKommunikation()"
-                        >
-                        <label class="checkbox-label" for="hasKommunikation">
-                            Kommunikationsprüfung vorhanden (20%)
-                        </label>
-                    </div>
-                </div>
-
-                <div id="kommunikationGroup" class="form-group hidden">
-                    <label class="label-info">
-                        <span>Kommunikationsprüfung</span>
-                        <span class="label-weight">20%</span>
-                    </label>
-                    <div class="input-with-unit">
-                        <input 
-                            type="number" 
-                            id="kommunikation" 
-                            placeholder="z.B. 2,0" 
-                            min="1" 
-                            max="6" 
-                            step="0.1"
-                            oninput="calculateGrade()"
-                        >
-                        <span class="input-unit">🎤</span>
+                    <div class="button-group">
+                        <button class="btn-primary" onclick="goToStep(2)" id="step1Btn" disabled>Weiter →</button>
                     </div>
                 </div>
             </div>
 
-            <!-- RESULT SECTION -->
+            <!-- STEP 2 -->
+            <div id="step2" class="step hidden">
+                <div class="card">
+                    <div class="step-indicator">Schritt 2 von 4</div>
+                    <div class="card-title">✏️ Schriftliche Prüfung</div>
+                    <div class="info-box">
+                        Das ist deine <strong>Schätzung</strong> für die schriftliche Prüfung. Du kennst das Ergebnis ja noch nicht - das ist nur eine Vorhersage! Sie zählt normalerweise 30%.
+                    </div>
+                    <div class="form-group">
+                        <label>Wie schätzt du dein Ergebnis in der schriftlichen Prüfung ein?</label>
+                        <span class="label-hint">Das ist eine Vermutung basierend auf deiner Vorbereitung</span>
+                        <div class="input-with-unit">
+                            <input 
+                                type="number" 
+                                id="schriftlich" 
+                                placeholder="z.B. 3,0" 
+                                min="1" 
+                                max="6" 
+                                step="0.1"
+                                oninput="updateProgress()"
+                            >
+                            <span class="input-unit">📊</span>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-tertiary" onclick="goToStep(1)">← Zurück</button>
+                        <button class="btn-primary" onclick="goToStep(3)" id="step2Btn" disabled>Weiter →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div id="step3" class="step hidden">
+                <div class="card">
+                    <div class="step-indicator">Schritt 3 von 4</div>
+                    <div class="card-title">🎤 Praktische Prüfung?</div>
+                    <div class="info-box">
+                        Manche Fächer (z.B. Fremdsprachen, Deutsch) haben eine mündliche oder praktische Prüfung. Andere haben sie nicht.
+                    </div>
+                    <div class="form-group">
+                        <label>Hat dein Fach eine Kommunikations-/praktische Prüfung?</label>
+                        <button class="option-button" onclick="selectOption('hasPractical', true, this)">
+                            <span class="option-icon">✅</span>
+                            <span>Ja, mein Fach hat eine</span>
+                        </button>
+                        <button class="option-button" onclick="selectOption('hasPractical', false, this)">
+                            <span class="option-icon">❌</span>
+                            <span>Nein, mein Fach hat keine</span>
+                        </button>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-tertiary" onclick="goToStep(2)">← Zurück</button>
+                        <button class="btn-primary" onclick="goToStep(4)" id="step3Btn" disabled>Weiter →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 4 -->
+            <div id="step4" class="step hidden">
+                <div class="card">
+                    <div class="step-indicator">Schritt 4 von 4</div>
+                    <div class="card-title" id="step4Title">🎤 Kommunikationsprüfung</div>
+                    <div class="info-box" id="step4Info">
+                        Das ist deine <strong>Schätzung</strong> für die mündliche/praktische Prüfung. Sie zählt normalerweise 20%.
+                    </div>
+                    <div class="form-group" id="practicalForm">
+                        <label id="practicalLabel">Wie schätzt du dein Ergebnis in der Kommunikationsprüfung ein?</label>
+                        <span class="label-hint">Das ist eine Vermutung basierend auf deiner Vorbereitung</span>
+                        <div class="input-with-unit">
+                            <input 
+                                type="number" 
+                                id="praktisch" 
+                                placeholder="z.B. 2,0" 
+                                min="1" 
+                                max="6" 
+                                step="0.1"
+                                oninput="updateProgress()"
+                            >
+                            <span class="input-unit">🎯</span>
+                        </div>
+                    </div>
+                    <div class="form-group hidden" id="nopracticalForm">
+                        <div class="info-box">
+                            ✅ Dein Fach hat keine praktische Prüfung. Die Berechnung basiert nur auf Jahresleistung und schriftliche Prüfung.
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-tertiary" onclick="goToStep(3)">← Zurück</button>
+                        <button class="btn-primary" onclick="calculateAndShowResult()" id="step4Btn" disabled>🎉 Ergebnis berechnen</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESULTS -->
             <div id="resultSection" class="hidden">
                 <div class="result-card">
                     <div class="result-label">Dein voraussichtlicher Notendurchschnitt</div>
@@ -525,28 +673,109 @@
                     <div id="gradeBadge"></div>
                     <div class="breakdown">
                         <div class="breakdown-item">
-                            <span class="breakdown-label">📌 Jahresleistung (50%)</span>
+                            <span class="breakdown-label">📌 Jahresleistung</span>
                             <span class="breakdown-value" id="jahresleistungResult">-</span>
                         </div>
                         <div class="breakdown-item">
-                            <span class="breakdown-label">✏️ Schriftlich (30%)</span>
+                            <span class="breakdown-label">✏️ Schriftlich (Schätzung)</span>
                             <span class="breakdown-value" id="schriftlichResult">-</span>
                         </div>
-                        <div id="kommunikationResult" class="breakdown-item hidden">
-                            <span class="breakdown-label">🎤 Kommunikation (20%)</span>
-                            <span class="breakdown-value" id="kommunikationValue">-</span>
+                        <div id="praktischResult" class="breakdown-item hidden">
+                            <span class="breakdown-label">🎤 Kommunikation (Schätzung)</span>
+                            <span class="breakdown-value" id="praktischValue">-</span>
+                        </div>
+                        <div class="breakdown-item" style="border-bottom: 2px solid var(--primary-color); font-weight: 700;">
+                            <span class="breakdown-label">Gewichtung nach deinen Einstellungen</span>
+                            <span id="weightInfo"></span>
                         </div>
                     </div>
                 </div>
 
-                <div id="adviceCard" class="card">
-                    <div class="card-title">💡 Tipps & Analysen</div>
+                <div class="card">
+                    <div class="card-title">💡 Deine Analyse</div>
                     <div id="adviceContent"></div>
                 </div>
-            </div>
 
-            <div class="button-group">
-                <button class="btn-secondary" onclick="resetForm()">🔄 Zurücksetzen</button>
+                <div class="button-group">
+                    <button class="btn-secondary" onclick="resetWizard()">🔄 Neu berechnen</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SETTINGS TAB -->
+        <div id="settings" class="tab-content">
+            <div class="card">
+                <div class="card-title">⚙️ Gewichtung anpassen</div>
+                <div class="info-box">
+                    Du kannst hier die Gewichtung der einzelnen Komponenten nach deinen Vorgaben anpassen. Die Summe muss 100% ergeben.
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-title">📌 Jahresleistung</div>
+                    <div class="weight-input-group">
+                        <div class="weight-input">
+                            <input 
+                                type="number" 
+                                id="weightJahresleistung" 
+                                value="50" 
+                                min="0" 
+                                max="100" 
+                                step="1"
+                                oninput="updateWeightDisplay()"
+                            >
+                        </div>
+                        <div class="weight-display" id="displayJahresleistung">50%</div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-title">✏️ Schriftliche Prüfung</div>
+                    <div class="weight-input-group">
+                        <div class="weight-input">
+                            <input 
+                                type="number" 
+                                id="weightSchriftlich" 
+                                value="30" 
+                                min="0" 
+                                max="100" 
+                                step="1"
+                                oninput="updateWeightDisplay()"
+                            >
+                        </div>
+                        <div class="weight-display" id="displaySchriftlich">30%</div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-title">🎤 Kommunikationsprüfung</div>
+                    <div class="weight-input-group">
+                        <div class="weight-input">
+                            <input 
+                                type="number" 
+                                id="weightPraktisch" 
+                                value="20" 
+                                min="0" 
+                                max="100" 
+                                step="1"
+                                oninput="updateWeightDisplay()"
+                            >
+                        </div>
+                        <div class="weight-display" id="displayPraktisch">20%</div>
+                    </div>
+                </div>
+
+                <div class="info-box" style="margin-top: 1.5rem;">
+                    <strong>Gesamtsumme:</strong> <span id="totalWeight">100</span>%
+                </div>
+
+                <div id="weightWarning" class="warning-badge hidden" style="margin-top: 1rem;">
+                    ⚠️ Die Summe muss genau 100% sein! Aktuell: <span id="weightWarningValue">100</span>%
+                </div>
+
+                <div class="button-group" style="margin-top: 2rem;">
+                    <button class="btn-secondary" onclick="resetWeights()">↻ Zurücksetzen</button>
+                    <button class="btn-primary" onclick="saveWeights()">💾 Speichern</button>
+                </div>
             </div>
         </div>
 
@@ -557,24 +786,27 @@
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFAQ(this)">
-                        Wie wird die Note berechnet?
+                        Wie funktioniert dieser Rechner?
                         <span class="chevron">▼</span>
                     </div>
                     <div class="faq-answer">
-                        Die Gesamtnote wird wie folgt berechnet:<br><br>
-                        <strong>Gesamtnote = (Jahresleistung × 0,5) + (Schriftliche × 0,3) + (Kommunikation × 0,2)*</strong><br><br>
-                        *Die Kommunikationsprüfung ist optional und wird nur berücksichtigt, wenn du sie hast.<br><br>
-                        Beispiel: Jahresleistung 2,5 + Schriftlich 3,0 + Kommunikation 2,0 = (2,5×0,5) + (3,0×0,3) + (2,0×0,2) = 1,25 + 0,9 + 0,4 = <strong>2,55</strong>
+                        Der Rechner führt dich Schritt für Schritt durch deine Daten:<br><br>
+                        1. <strong>Jahresleistung:</strong> Dein Durchschnitt während des ganzen Jahres<br>
+                        2. <strong>Schriftliche Prüfung:</strong> Deine Schätzung für das Ergebnis<br>
+                        3. <strong>Praktische Prüfung:</strong> Ob es eine gibt<br>
+                        4. <strong>Kommunikationsprüfung:</strong> Falls vorhanden, deine Schätzung<br><br>
+                        Dann berechnet er mit der Gewichtung deine voraussichtliche Endnote.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFAQ(this)">
-                        Was ist die Jahresleistung?
+                        Was bedeutet "Schätzung"?
                         <span class="chevron">▼</span>
                     </div>
                     <div class="faq-answer">
-                        Die Jahresleistung ist deine durchschnittliche Note während des Schuljahres. Sie wird aus deinen Klassenarbeiten, Tests, Mitarbeit und sonstigen Leistungen berechnet. Sie ist mit 50% die wichtigste Komponente für deine Gesamtnote.
+                        Du kennst die Ergebnisse deiner Prüfungen noch nicht! Das Tool soll dir helfen, eine <strong>Vermutung</strong> aufzustellen, wie gut/schlecht du wahrscheinlich abschneiden wirst. Basierend darauf kannst du überlegen, wie viel du noch lernen musst.<br><br>
+                        Es ist nicht exakt - es ist eine Hilfe für deine Planung!
                     </div>
                 </div>
 
@@ -584,62 +816,57 @@
                         <span class="chevron">▼</span>
                     </div>
                     <div class="faq-answer">
-                        Die Kommunikationsprüfung (auch mündliche Prüfung) gibt es vor allem in:<br>
+                        Meistens:<br>
                         • <strong>Fremdsprachen</strong> (Englisch, Französisch, Spanisch, etc.)<br>
-                        • <strong>Deutsch</strong> (je nach Bundesland)<br>
-                        • Einige weitere Fächer je nach Schulart<br><br>
-                        Ob dein Fach eine Kommunikationsprüfung hat, erfragst du am besten bei deinem Lehrer oder schaust in deinen Schulunterlagen.
+                        • <strong>Deutsch</strong> (in vielen Bundesländern)<br>
+                        • <strong>Naturwissenschaften</strong> (manchmal praktische Teile)<br><br>
+                        Frag einfach deinen Lehrer, ob es eine gibt!
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFAQ(this)">
-                        Wie genau ist dieser Rechner?
+                        Kann ich die Gewichtung ändern?
                         <span class="chevron">▼</span>
                     </div>
                     <div class="faq-answer">
-                        Dieser Rechner ist eine <strong>Schätzung</strong> basierend auf den deutschen Bewertungsrichtlinien. Die tatsächliche Enddnote kann je nach Bundesland und Schulart leicht abweichen. Er gibt dir aber einen sehr guten Überblick über deine voraussichtliche Note!
+                        <strong>Ja!</strong> Gehe zum Reiter "Gewichtung" und ändere die Prozentsätze nach deinen Vorgaben. Manche Schulen/Bundesländer haben andere Gewichtungen. Du kannst alles anpassen - die Summe muss nur 100% sein.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFAQ(this)">
-                        Kann ich Dezimalzahlen eingeben?
+                        Wie kann ich meine Note verbessern?
                         <span class="chevron">▼</span>
                     </div>
                     <div class="faq-answer">
-                        Ja! Du kannst Noten wie 2,5 oder 3,7 eingeben. Der Rechner arbeitet mit Dezimalzahlen und rundet die Enddnote auf eine Dezimalstelle.
+                        <strong>Strategie:</strong><br>
+                        • Die <strong>Jahresleistung</strong> zählt am meisten (50%) - Konzentriere dich auf Mitarbeit!<br>
+                        • Die <strong>schriftliche Prüfung</strong> zählt 30% - Intensives Lernen zahlt sich aus!<br>
+                        • Die <strong>Kommunikation</strong> zählt 20% - Übe Sprachpraxis!<br><br>
+                        Nutze den Rechner, um zu sehen, wo du noch zulegen kannst!
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFAQ(this)">
-                        Was bedeuten die Farben?
+                        Wie genau ist die Berechnung?
                         <span class="chevron">▼</span>
                     </div>
                     <div class="faq-answer">
-                        Die Farben zeigen die Notenqualität an:<br>
-                        • <span class="grade-badge grade-1">1 - Sehr gut</span><br>
-                        • <span class="grade-badge grade-2">2 - Gut</span><br>
-                        • <span class="grade-badge grade-3">3 - Befriedigend</span><br>
-                        • <span class="grade-badge grade-4">4 - Ausreichend</span><br>
-                        • <span class="grade-badge grade-5">5 - Mangelhaft</span><br>
-                        • <span class="grade-badge grade-6">6 - Ungenügend</span>
+                        Der Rechner ist so genau wie deine Eingaben! Die Formel ist einfach:<br><br>
+                        <strong>Endnote = (J × Gewicht-J) + (S × Gewicht-S) + (K × Gewicht-K)</strong><br><br>
+                        Aber Achtung: Das ist immer noch eine Schätzung basierend auf deinen Vermutungen. Die echte Note wird sich wahrscheinlich um 0,3 bis 0,5 unterscheiden.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFAQ(this)">
-                        Wie kann ich meine Note noch verbessern?
+                        Kann ich meine Werte speichern?
                         <span class="chevron">▼</span>
                     </div>
                     <div class="faq-answer">
-                        <strong>Tipps zur Notenverbesserung:</strong><br>
-                        • <strong>Jahresleistung:</strong> Die Jahresleistung ist am wichtigsten (50%)! Konzentriere dich auf gute Mitarbeit und Übungsaufgaben.<br>
-                        • <strong>Schriftliche Prüfung:</strong> Lerne systematisch und mache Übungsaufgaben. Diese zählt 30%.<br>
-                        • <strong>Kommunikationsprüfung:</strong> Übe Sprachpraxis und Aussprache. Diese zählt 20%.<br>
-                        • Nutze Lerngruppen und Nachhilfe wenn nötig<br>
-                        • Frage deinen Lehrer nach Tipps und Unterstützung
+                        Der Rechner speichert deine Gewichtung automatisch im Browser. Wenn du die Seite neu öffnest, sind deine Einstellungen noch da. Die Noten werden zurückgesetzt, damit du immer frisch anfangen kannst!
                     </div>
                 </div>
             </div>
@@ -647,67 +874,165 @@
     </div>
 
     <script>
-        function toggleKommunikation() {
-            const checkbox = document.getElementById('hasKommunikation');
-            const kommunikationGroup = document.getElementById('kommunikationGroup');
-            
-            if (checkbox.checked) {
-                kommunikationGroup.classList.remove('hidden');
-            } else {
-                kommunikationGroup.classList.add('hidden');
-                document.getElementById('kommunikation').value = '';
+        let currentStep = 1;
+        let hasPractical = null;
+
+        // Laden gespeicherte Gewichte
+        window.addEventListener('load', () => {
+            const savedWeights = localStorage.getItem('notenschnittWeights');
+            if (savedWeights) {
+                const weights = JSON.parse(savedWeights);
+                document.getElementById('weightJahresleistung').value = weights.jahresleistung || 50;
+                document.getElementById('weightSchriftlich').value = weights.schriftlich || 30;
+                document.getElementById('weightPraktisch').value = weights.praktisch || 20;
+                updateWeightDisplay();
             }
-            calculateGrade();
+        });
+
+        function updateWeightDisplay() {
+            const j = parseFloat(document.getElementById('weightJahresleistung').value) || 0;
+            const s = parseFloat(document.getElementById('weightSchriftlich').value) || 0;
+            const p = parseFloat(document.getElementById('weightPraktisch').value) || 0;
+            const total = j + s + p;
+
+            document.getElementById('displayJahresleistung').textContent = j + '%';
+            document.getElementById('displaySchriftlich').textContent = s + '%';
+            document.getElementById('displayPraktisch').textContent = p + '%';
+            document.getElementById('totalWeight').textContent = total;
+
+            if (total !== 100) {
+                document.getElementById('weightWarning').classList.remove('hidden');
+                document.getElementById('weightWarningValue').textContent = total;
+            } else {
+                document.getElementById('weightWarning').classList.add('hidden');
+            }
         }
 
-        function calculateGrade() {
-            const jahresleistung = parseFloat(document.getElementById('jahresleistung').value) || 0;
-            const schriftlich = parseFloat(document.getElementById('schriftlich').value) || 0;
-            const hasKommunikation = document.getElementById('hasKommunikation').checked;
-            const kommunikation = parseFloat(document.getElementById('kommunikation').value) || 0;
+        function resetWeights() {
+            document.getElementById('weightJahresleistung').value = 50;
+            document.getElementById('weightSchriftlich').value = 30;
+            document.getElementById('weightPraktisch').value = 20;
+            updateWeightDisplay();
+        }
 
-            // Validation
-            if (jahresleistung === 0 || schriftlich === 0) {
-                document.getElementById('resultSection').classList.add('hidden');
+        function saveWeights() {
+            const j = parseFloat(document.getElementById('weightJahresleistung').value) || 0;
+            const s = parseFloat(document.getElementById('weightSchriftlich').value) || 0;
+            const p = parseFloat(document.getElementById('weightPraktisch').value) || 0;
+            const total = j + s + p;
+
+            if (total !== 100) {
+                alert('Die Summe muss 100% sein! Aktuell: ' + total + '%');
                 return;
             }
 
-            if (hasKommunikation && kommunikation === 0) {
-                document.getElementById('resultSection').classList.add('hidden');
-                return;
+            localStorage.setItem('notenschnittWeights', JSON.stringify({
+                jahresleistung: j,
+                schriftlich: s,
+                praktisch: p
+            }));
+
+            alert('✅ Gewichtung gespeichert!');
+            switchTab('wizard');
+        }
+
+        function selectOption(name, value, element) {
+            hasPractical = value;
+            document.querySelectorAll('.option-button').forEach(btn => btn.classList.remove('selected'));
+            element.classList.add('selected');
+            document.getElementById('step3Btn').disabled = false;
+
+            if (value) {
+                document.getElementById('step4Title').textContent = '🎤 Kommunikationsprüfung';
+                document.getElementById('step4Info').innerHTML = 'Das ist deine <strong>Schätzung</strong> für die mündliche/praktische Prüfung. Sie zählt normalerweise 20%.';
+                document.getElementById('practicalForm').classList.remove('hidden');
+                document.getElementById('nopracticalForm').classList.add('hidden');
+            } else {
+                document.getElementById('step4Title').textContent = '✅ Bestätigung';
+                document.getElementById('step4Info').innerHTML = 'Super! Dein Fach hat keine praktische Prüfung. Die Berechnung basiert auf Jahresleistung und schriftliche Prüfung.';
+                document.getElementById('practicalForm').classList.add('hidden');
+                document.getElementById('nopracticalForm').classList.remove('hidden');
+                document.getElementById('praktisch').value = '';
             }
+        }
+
+        function updateProgress() {
+            const jahr = document.getElementById('jahresleistung').value;
+            const schrift = document.getElementById('schriftlich').value;
+
+            document.getElementById('step1Btn').disabled = !jahr;
+            document.getElementById('step2Btn').disabled = !schrift;
+
+            if (hasPractical === null) {
+                document.getElementById('step4Btn').disabled = true;
+            } else if (hasPractical === true) {
+                const praktisch = document.getElementById('praktisch').value;
+                document.getElementById('step4Btn').disabled = !praktisch;
+            } else {
+                document.getElementById('step4Btn').disabled = false;
+            }
+
+            const progress = (currentStep / 4) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function goToStep(step) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+            currentStep = step;
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+
+        function calculateAndShowResult() {
+            const jahresleistung = parseFloat(document.getElementById('jahresleistung').value);
+            const schriftlich = parseFloat(document.getElementById('schriftlich').value);
+
+            const weights = JSON.parse(localStorage.getItem('notenschnittWeights')) || {
+                jahresleistung: 50,
+                schriftlich: 30,
+                praktisch: 20
+            };
 
             let finalGrade;
-            
-            if (hasKommunikation) {
-                finalGrade = (jahresleistung * 0.5) + (schriftlich * 0.3) + (kommunikation * 0.2);
+            let praktisch = null;
+
+            if (hasPractical) {
+                praktisch = parseFloat(document.getElementById('praktisch').value);
+                const wJ = weights.jahresleistung / 100;
+                const wS = weights.schriftlich / 100;
+                const wP = weights.praktisch / 100;
+                finalGrade = (jahresleistung * wJ) + (schriftlich * wS) + (praktisch * wP);
             } else {
-                // Recalculate without Kommunikation, redistribute weights
-                finalGrade = (jahresleistung * 0.5) + (schriftlich * 0.5);
+                const wJ = weights.jahresleistung / 100;
+                const wS = weights.schriftlich / 100;
+                const total = wJ + wS;
+                finalGrade = ((jahresleistung * wJ) + (schriftlich * wS)) / total;
             }
 
-            // Round to one decimal place
             finalGrade = Math.round(finalGrade * 10) / 10;
 
-            // Update results
             document.getElementById('finalGrade').textContent = finalGrade;
             document.getElementById('jahresleistungResult').textContent = jahresleistung;
             document.getElementById('schriftlichResult').textContent = schriftlich;
 
-            if (hasKommunikation) {
-                document.getElementById('kommunikationResult').classList.remove('hidden');
-                document.getElementById('kommunikationValue').textContent = kommunikation;
+            if (hasPractical) {
+                document.getElementById('praktischResult').classList.remove('hidden');
+                document.getElementById('praktischValue').textContent = praktisch;
+                document.getElementById('weightInfo').innerHTML = `${weights.jahresleistung}% + ${weights.schriftlich}% + ${weights.praktisch}%`;
             } else {
-                document.getElementById('kommunikationResult').classList.add('hidden');
+                document.getElementById('praktischResult').classList.add('hidden');
+                const adjustedJ = (weights.jahresleistung / (weights.jahresleistung + weights.schriftlich) * 100).toFixed(0);
+                const adjustedS = (weights.schriftlich / (weights.jahresleistung + weights.schriftlich) * 100).toFixed(0);
+                document.getElementById('weightInfo').innerHTML = `${adjustedJ}% + ${adjustedS}% (angepasst)`;
             }
 
-            // Update badge
             updateGradeBadge(finalGrade);
-
-            // Generate advice
-            generateAdvice(jahresleistung, schriftlich, kommunikation, hasKommunikation, finalGrade);
+            generateAdvice(jahresleistung, schriftlich, praktisch, hasPractical, finalGrade);
 
             document.getElementById('resultSection').classList.remove('hidden');
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            window.scrollTo(0, 0);
         }
 
         function updateGradeBadge(grade) {
@@ -717,112 +1042,110 @@
 
             if (grade <= 1.5) {
                 badgeClass = 'grade-1';
-                badgeText = '🌟 Sehr Gut! Ausgezeichnet!';
+                badgeText = '🌟 Sehr Gut!';
             } else if (grade <= 2.5) {
                 badgeClass = 'grade-2';
-                badgeText = '✅ Gut! Sehr solide!';
+                badgeText = '✅ Gut!';
             } else if (grade <= 3.5) {
                 badgeClass = 'grade-3';
-                badgeText = '👍 Befriedigend. Standard.';
+                badgeText = '👍 Befriedigend';
             } else if (grade <= 4.5) {
                 badgeClass = 'grade-4';
-                badgeText = '⚠️ Ausreichend. Noch OK!';
+                badgeText = '⚠️ Ausreichend';
             } else if (grade <= 5.5) {
                 badgeClass = 'grade-5';
-                badgeText = '❌ Mangelhaft. Vorsicht!';
+                badgeText = '❌ Mangelhaft';
             } else {
                 badgeClass = 'grade-6';
-                badgeText = '🚨 Ungenügend. Hilfe nötig!';
+                badgeText = '🚨 Ungenügend';
             }
 
             badge.innerHTML = `<span class="grade-badge ${badgeClass}">${badgeText}</span>`;
         }
 
-        function generateAdvice(jahresleistung, schriftlich, kommunikation, hasKommunikation, finalGrade) {
+        function generateAdvice(jahresleistung, schriftlich, praktisch, hasPractical, finalGrade) {
             const adviceContent = document.getElementById('adviceContent');
             let advice = '';
 
-            // Determine which area needs improvement
             if (finalGrade <= 2.0) {
-                advice += '<div class="success-badge">🎉 Du machst dir selbst Gedanken über deine Note - das ist sehr positiv! Mit dieser Quote bist du auf sehr gutem Weg!</div>';
+                advice += '<div class="success-badge">🎉 Sehr gut! Du hast eine super Note zu erwarten! Weiter so!</div>';
             } else if (finalGrade <= 3.0) {
-                advice += '<div class="success-badge">✅ Deine Quote ist solide! Du brauchst aber noch ein wenig Fokus.</div>';
+                advice += '<div class="success-badge">✅ Gute Chancen! Du solltest eine solide Note bekommen.</div>';
             } else if (finalGrade <= 4.0) {
-                advice += '<div class="warning-badge">⚠️ Die Note ist noch ausreichend, aber es könnte knapp werden. Konzentriere dich auf die Schwachstellen!</div>';
+                advice += '<div class="warning-badge">⚠️ Es wird knapp! Die Note ist ausreichend, aber du solltest noch lernen.</div>';
             } else {
-                advice += '<div class="warning-badge">🚨 Die Note könnte kritisch werden. Du solltest schnell handeln und dich intensiv vorbereiten!</div>';
+                advice += '<div class="danger-badge">🚨 Kritisch! Du solltest jetzt intensiv lernen!</div>';
             }
 
-            // Identify weak areas
-            const values = [jahresleistung, schriftlich];
-            if (hasKommunikation) values.push(kommunikation);
-
-            const weakest = Math.max(...values);
-            const strongest = Math.min(...values);
-
-            advice += '<br><br><strong>Analyse deiner Leistungen:</strong><br>';
+            advice += '<br><br><strong>📊 Wo kannst du noch zulegen?</strong><br>';
 
             if (jahresleistung >= 4.0) {
-                advice += '📌 <strong>Jahresleistung:</strong> Das ist deine Schwachstelle (50% Gewicht!). Konzentriere dich auf bessere Mitarbeit und Aufgaben!<br>';
+                advice += '📌 <strong>Jahresleistung (zählt 50%):</strong> Das ist deine Schwachstelle! Konzentriere dich auf bessere Mitarbeit in den letzten Wochen!<br>';
             } else if (jahresleistung >= 3.0) {
-                advice += '📌 <strong>Jahresleistung:</strong> Ganz okay, könnte aber besser sein.<br>';
+                advice += '📌 <strong>Jahresleistung:</strong> Ganz solide - da ist noch ein wenig Luft nach oben!<br>';
             } else {
-                advice += '📌 <strong>Jahresleistung:</strong> Sehr gut! Das ist eine solide Basis.<br>';
+                advice += '📌 <strong>Jahresleistung:</strong> Sehr gut! Das ist eine starke Basis!<br>';
             }
 
             if (schriftlich >= 4.0) {
-                advice += '✏️ <strong>Schriftliche Prüfung:</strong> Du solltest hier deutlich mehr lernen. Das zählt 30%!<br>';
+                advice += '✏️ <strong>Schriftliche Prüfung (zählt 30%):</strong> Hier solltest du gezielt lernen! Das bringt dir die meisten Punkte!<br>';
             } else if (schriftlich >= 3.0) {
-                advice += '✏️ <strong>Schriftliche Prüfung:</strong> Ganz solide, aber Lernzeit ist wertvoll.<br>';
+                advice += '✏️ <strong>Schriftliche Prüfung:</strong> Deine Schätzung ist realistisch - ein bisschen Lernzeit mehr könnte helfen!<br>';
             } else {
-                advice += '✏️ <strong>Schriftliche Prüfung:</strong> Sehr gute Vorbereitung bisher!<br>';
+                advice += '✏️ <strong>Schriftliche Prüfung:</strong> Sehr gute Vorbereitung - du bist auf gutem Weg!<br>';
             }
 
-            if (hasKommunikation) {
-                if (kommunikation >= 4.0) {
-                    advice += '🎤 <strong>Kommunikation:</strong> Übe deine Sprachfähigkeiten. Das zählt 20%!<br>';
-                } else if (kommunikation >= 3.0) {
-                    advice += '🎤 <strong>Kommunikation:</strong> Guter Fortschritt, weiter so!<br>';
+            if (hasPractical) {
+                if (praktisch >= 4.0) {
+                    advice += '🎤 <strong>Kommunikation (zählt 20%):</strong> Übe deine Sprachpraxis! Jede Note zählt!<br>';
+                } else if (praktisch >= 3.0) {
+                    advice += '🎤 <strong>Kommunikation:</strong> Gute Vorhersage! Ein bisschen Üben könnte noch helfen!<br>';
                 } else {
-                    advice += '🎤 <strong>Kommunikation:</strong> Ausgezeichnet! Deine Sprachpraxis zahlt sich aus!<br>';
+                    advice += '🎤 <strong>Kommunikation:</strong> Ausgezeichnet! Du bist gut vorbereitet!<br>';
                 }
+            }
+
+            advice += '<br><strong>💪 Nächste Schritte:</strong><br>';
+            if (finalGrade > 3.5) {
+                advice += '1. Mache einen Lernplan für die nächsten Tage<br>2. Konzentriere dich auf die schwächeren Bereiche<br>3. Bilde Lerngruppen mit Mitschülern<br>4. Nutze Online-Ressourcen und Videos<br>5. Sprich mit deinem Lehrer um Tipps';
+            } else {
+                advice += '1. Du bist auf sehr gutem Weg - bleib dran!<br>2. Wiederhole die Hauptthemen kurz vor der Prüfung<br>3. Sei zuversichtlich - du schaffst das!';
             }
 
             adviceContent.innerHTML = advice;
         }
 
+        function resetWizard() {
+            document.getElementById('jahresleistung').value = '';
+            document.getElementById('schriftlich').value = '';
+            document.getElementById('praktisch').value = '';
+            hasPractical = null;
+            currentStep = 1;
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step1').classList.add('active');
+            document.getElementById('resultSection').classList.add('hidden');
+            document.querySelectorAll('.option-button').forEach(btn => btn.classList.remove('selected'));
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+
         function switchTab(tabName) {
-            // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
-
-            // Remove active from all buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
 
-            // Show selected tab
             document.getElementById(tabName).classList.add('active');
-
-            // Add active to clicked button
-            event.target.classList.add('active');
-        }
-
-        function resetForm() {
-            document.getElementById('jahresleistung').value = '';
-            document.getElementById('schriftlich').value = '';
-            document.getElementById('kommunikation').value = '';
-            document.getElementById('hasKommunikation').checked = false;
-            document.getElementById('kommunikationGroup').classList.add('hidden');
-            document.getElementById('resultSection').classList.add('hidden');
+            event.target?.classList.add('active');
+            window.scrollTo(0, 0);
         }
 
         function toggleFAQ(element) {
             const faqItem = element.parentElement;
             const answer = faqItem.querySelector('.faq-answer');
 
-            // Close all other FAQs
             document.querySelectorAll('.faq-item').forEach(item => {
                 if (item !== faqItem) {
                     item.classList.remove('active');
@@ -830,17 +1153,11 @@
                 }
             });
 
-            // Toggle current FAQ
             faqItem.classList.toggle('active');
             answer.classList.toggle('active');
         }
 
-        // Prevent form submission on enter
-        document.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && e.target.tagName === 'INPUT') {
-                e.preventDefault();
-            }
-        });
+        updateProgress();
     </script>
 </body>
 </html>
